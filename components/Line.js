@@ -3,9 +3,14 @@ import React, { useState } from 'react';
 import styles from "./Line.module.css";
 
 export default function Line(props) {
-    const [isTextVisible, setIsTextVisible] = useState(true);
+    const [isTextForcedVisible, setIsTextForcedVisible] = useState(false);
     
-    const handleRevealerButtonClick = (event) => { setIsTextVisible(event.target.value) }
+    const handleRevealerButtonClick = (event) => { 
+        setIsTextForcedVisible(event.target.checked);
+    
+    }
+
+    const isTextVisible = !props.isHighlighted || isTextForcedVisible || !props.hideHighlightedLines;
 
     return (
         <li className={props.isHighlighted ? styles.highlightedLine : styles.line }>
@@ -24,7 +29,7 @@ export default function Line(props) {
 
             {/* <span className={!props.hideHighlightedLines || (props.hideHighlightedLines && !props.isHighlighted) ?  styles.textShow : styles.textHide} > */}
             <span className={isTextVisible ?  styles.textShow : styles.textHide} >
-                {isTextVisible} -  {props.text}
+                {props.text}
             </span>
         </li>
     );
