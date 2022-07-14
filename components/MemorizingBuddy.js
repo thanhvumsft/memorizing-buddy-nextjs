@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useSelf, useOthers, useUpdateMyPresence } from "../liveblocks.config.ts";
 import styles from "./MemorizingBuddy.module.css";
 import lemonstre from "../data/lemonstre";
+import romeoandjuliet from "../data/romeoandjuliet";
 import Line from "../components/Line";
 import Cursor from '../components/Cursor';
 import { Avatar } from "../components/Avatar";
 
+
 export function MemorizingBuddy() {
+    
+    const [textToPractice, setTextToPractice] = useState(romeoandjuliet);
     const [allScript, setAllScript] = useState(null);
     const [isHiddenLines, setIsHiddenLines] = useState(false); //false is the default value i want to pass
     const [cast, setCast] = useState([]);
@@ -20,14 +24,22 @@ export function MemorizingBuddy() {
     const hasMoreUsers = others.length > 3;
     const updateMyPresence = useUpdateMyPresence();
 
-    useEffect(() => {
-        setAllScript(lemonstre.script)
-            setCast(lemonstre.script.cast.map(value => (
+    const refreshScreen = (text) => {
+        console.log("text: " + text.script.title)
+        setTextToPractice(text)
+        textToPractice=text;
+        console.log("textToPractice.script.title: " + textToPractice.script.title)
+        setAllScript(textToPractice.script)
+        setCast(textToPractice.script.cast.map(value => (
             { 
                     id: value.id, 
                     displayName: value.displayName, 
                     isHighlighted: false 
             })))
+    }
+
+    useEffect(() => {
+        refreshScreen(textToPractice)
     }, []);
 
     //What's the best way to handle localization?
@@ -139,6 +151,20 @@ export function MemorizingBuddy() {
         )
     }
 
+    const handleScriptSelectorChange = (event) => { 
+
+        console.log("Select value: " + event.target.value)
+        if(event.target.value=="lemonstre")
+        {
+            console.log("Case lemonstre");
+            refreshScreen(lemonstre)
+        ;}
+        else if(event.target.value=="romeoandjuliet")
+        {
+            console.log("Case romeoandjuliet");
+            refreshScreen(romeoandjuliet)
+        ;}
+    }
 
 
     if (allScript == null) {
@@ -169,6 +195,13 @@ export function MemorizingBuddy() {
                 </div>
             </main>
             <h1>Memorizing Buddy</h1>
+            <div>
+                <label for="scriptSelector">Choose your script to practice: </label>
+                <select id="scriptSelector" onChange={(event) => handleScriptSelectorChange(event)} >
+                    <option value="romeoandjuliet">🇬🇧 Romeo & Juliet</option>
+                    <option value="lemonstre">🇫🇷 Le Monstre</option>
+                </select>
+            </div>
             <div>{renderOptions()}</div>
             <div>{renderScript()}</div>
         </div>
