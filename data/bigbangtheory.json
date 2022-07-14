@@ -1,0 +1,116 @@
+{
+    "script": {
+        "type": "sitcom",
+        "title": "Big Bang Theory",
+        "lang": "en-US",
+        "cast": [
+            {
+                "id": "sheldon",
+                "displayName": "Sheldon"
+            },
+            {
+                "id": "leonard",
+                "displayName": "Leonard"
+            }
+        ],
+        "sections": [
+            {
+                "number": "1",
+                "lines": [
+                    {
+                        "characterId": "sheldon",
+                        "text": "Buona sera, Luigi’s Pizza. Buona sera. It means good evening in Italian. May I say, having to explain that to you calls into question the authenticity of your ristorante?"
+                    },
+                    {
+                        "characterId": "leonard",
+                        "text": "Okay, I’m out of here."
+                    },
+                    {
+                        "characterId": "sheldon",
+                        "text": "Un momento. Oh, for heaven’s sake, now you’re being deliberately stupid. Where are you going?"
+                    },
+                    {
+                        "characterId": "leonard",
+                        "text": "I’m having dinner with Priya at Raj’s. I think Howard’s going to be there. You want to join us?"
+                    },
+                    {
+                        "characterId": "sheldon",
+                        "text": "But tonight’s Thursday. On Thursdays, everybody comes over here and has pizza. Or a reasonable facsimile prepared by someone claiming to be Luigi, but who sounds suspiciously like Jackie Chan."
+                    },
+                    {
+                        "characterId": "leonard",
+                        "text": "Can’t we make a one-time exception for tonight?"
+                    },
+                    {
+                        "characterId": "sheldon",
+                        "text": "We could. We could also stop using the letter M, but I think that idea is isguided and oronic."
+                    },
+                    {
+                        "characterId": "leonard",
+                        "text": "Just come with me to Raj’s."
+                    },
+                    {
+                        "characterId": "sheldon",
+                        "text": "Well, I don’t want to go to a party."
+                    },
+                    {
+                        "characterId": "leonard",
+                        "text": "It’s not a party. It’s the same group of people who hang out here, hanging out over there."
+                    },
+                    {
+                        "characterId": "sheldon",
+                        "text": "I’m sorry, but five people eating and chatting is a party."
+                    },
+                    {
+                        "characterId": "leonard",
+                        "text": "How come it’s not a party when we do it here?"
+                    },
+                    {
+                        "characterId": "sheldon",
+                        "text": "Because we don’t throw parties."
+                    },
+                    {
+                        "characterId": "leonard",
+                        "text": "I don’t know what to tell you, Sheldon. I’m going to see Priya. Everyone’s over there. You coming or not?"
+                    },
+                    {
+                        "characterId": "sheldon",
+                        "text": "Well, no, sir, and do you know why? In a word, tradition. Every Thursday night for the last eight years, you and I and our friends have gathered here in this very spot to break bread covered with cheese and sauce, discuss the issues of the day, and yes, share a laugh or two. But I guess our rich heritage means nothing to you."
+                    },
+                    {
+                        "characterId": "leonard",
+                        "text": "I guess you’re right. See you later."
+                    },
+                    {
+                        "characterId": "sheldon",
+                        "text": "Wait! Leonard! Wait! What am I going to do for dinner?"
+                    },
+                    {
+                        "characterId": "leonard",
+                        "text": "Come with me to Raj’s and eat there."
+                    },
+                    {
+                        "characterId": "sheldon",
+                        "text": "I can’t do that. What if he serves haggis and blood pudding?"
+                    },
+                    {
+                        "characterId": "leonard",
+                        "text": "I really doubt that’s what he’ll serve."
+                    },
+                    {
+                        "characterId": "sheldon",
+                        "text": "But what if he does? I’ll be obliged to dine on liver and lungs stuffed in a sheep’s stomach. And frankly, blood pudding is essentially the same thing. I don’t know why he’s serving both."
+                    },
+                    {
+                        "characterId": "leonard",
+                        "text": "What do you want to do? You want to come with me, or do you want to sit here alone?"
+                    },
+                    {
+                        "characterId": "sheldon",
+                        "text": "No, I’ll go to your haggis party. But I’m telling you, this is adness. This is utter and coplete adness."
+                    }
+                ]
+            }
+        ]
+    }
+}

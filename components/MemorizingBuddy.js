@@ -3,6 +3,7 @@ import { useSelf, useOthers, useUpdateMyPresence } from "../liveblocks.config.ts
 import styles from "./MemorizingBuddy.module.css";
 import lemonstre from "../data/lemonstre";
 import romeoandjuliet from "../data/romeoandjuliet";
+import bigbangtheory from "../data/bigbangtheory";
 import Line from "../components/Line";
 import Cursor from '../components/Cursor';
 import { Avatar } from "../components/Avatar";
@@ -10,7 +11,7 @@ import { Avatar } from "../components/Avatar";
 
 export function MemorizingBuddy() {
     
-    const [textToPractice, setTextToPractice] = useState(romeoandjuliet);
+    const [textToPractice, setTextToPractice] = useState(bigbangtheory);
     const [allScript, setAllScript] = useState(null);
     const [isHiddenLines, setIsHiddenLines] = useState(false); //false is the default value i want to pass
     const [cast, setCast] = useState([]);
@@ -27,6 +28,7 @@ export function MemorizingBuddy() {
     const refreshScreen = (text) => {
         console.log("text: " + text.script.title)
         setTextToPractice(text)
+        //The only way for me see the text change live is by adding that step, which feels weird
         textToPractice=text;
         console.log("textToPractice.script.title: " + textToPractice.script.title)
         setAllScript(textToPractice.script)
@@ -164,6 +166,11 @@ export function MemorizingBuddy() {
             console.log("Case romeoandjuliet");
             refreshScreen(romeoandjuliet)
         ;}
+        else if(event.target.value=="bigbangtheory")
+        {
+            console.log("Case bigbangtheory");
+            refreshScreen(bigbangtheory)
+        ;}
     }
 
 
@@ -198,6 +205,7 @@ export function MemorizingBuddy() {
             <div>
                 <label for="scriptSelector">Choose your script to practice: </label>
                 <select id="scriptSelector" onChange={(event) => handleScriptSelectorChange(event)} >
+                    <option value="bigbangtheory">🇺🇸 Big Bang Theory</option>
                     <option value="romeoandjuliet">🇬🇧 Romeo & Juliet</option>
                     <option value="lemonstre">🇫🇷 Le Monstre</option>
                 </select>
