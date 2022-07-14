@@ -1,0 +1,720 @@
+{
+    "script": {
+        "type": "play",
+        "title": "Le Monstre",
+        "lang": "fr-FR",
+        "cast": [
+            {
+                "id": "nob",
+                "displayName": "Nob"
+            },
+            {
+                "id": "tim",
+                "displayName": "Tim"
+            },
+            {
+                "id": "lil",
+                "displayName": "Lil"
+            },
+            {
+                "id": "hommeVenerable",
+                "displayName": "Homme Vénérable"
+            },
+            {
+                "id": "lesFemmes",
+                "displayName": "Les Femmes"
+            },
+            {
+                "id": "lesHommes",
+                "displayName": "Les Hommes"
+            },
+            {
+                "id": "unHomme",
+                "displayName": "Un Homme"
+            },
+            {
+                "id": "homme1",
+                "displayName": "Homme 1"
+            },
+            {
+                "id": "homme2",
+                "displayName": "Homme 2"
+            },
+            {
+                "id": "homme3",
+                "displayName": "Homme 3"
+            },
+            {
+                "id": "tous",
+                "displayName": "Tous"
+            }
+        ],
+        "sections": [
+            {
+                "number": "1",
+                "lines": [
+                    {
+                        "characterId": "nob",
+                        "text": "Tim. Tim. Tim. Réveille-toi. Il y a un animal énorme dans le grand piège, Tim. Un animal bizarre."
+                    },
+                    {
+                        "characterId": "tim",
+                        "text": "Toi-même tu es un animal bizarre, Nob. Il est vraiment trop tôt pour que je me lève."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Non, Tim, réellement, j'aimerais que tu viennes et que tu le regardes. Tu seras très étonné. Tu n'as jamais vu un animal aussi grand et aussi horrible."
+                    },
+                    {
+                        "characterId": "tim",
+                        "text": "Un animal horrible? Mais quelle sorte d'animal, Nob? Cela ressemble certainement à quelque chose."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Non, justement, Tim. Je t'assure que cela ne ressemble à rien, à rien de ce que nous avons pu voir jusqu'à présent."
+                    },
+                    {
+                        "characterId": "tim",
+                        "text": "Mais cela peut attendre le matin, Nob, cela peut certainement attendre le matin."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Non, Tim, je ne pense pas. Je ne sais pas que faire et... j'ai peur."
+                    },
+                    {
+                        "characterId": "tim",
+                        "text": "Peur, Nob? Toi? Tu as peur?"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Oui, j'ai peur. Viens donc, Tim. Nous déciderons ensemble ensuite de ce qu'il conviendra de faire. N'es-tu pas mon meilleur ami, Tim? J'ai besoin de toi."
+                    },
+                    {
+                        "characterId": "tim",
+                        "text": "Cela me semble sérieux, Nob. C'est bon. Je te suis. Mais qu'entend-on? Quel est ce bruit bizarre?"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "C'est l'animal, Tim. C'est la respiration de l'animal que tu entends.."
+                    },
+                    {
+                        "characterId": "tim",
+                        "text": "Ce n'est pas possible! D'aussi loin?"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Oui, Tim. N'est-ce pas inquiétant?"
+                    },
+                    {
+                        "characterId": "tim",
+                        "text": "Allons voir."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Je ne veux pas, je n'aimerais pas le voir encore une fois. Va, Tim. Rends-toi compte par toi-même."
+                    },
+                    {
+                        "characterId": "tim",
+                        "text": "C'est de plus en plus étrange."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Tu l'as vu, Tim? Tu es pâle."
+                    },
+                    {
+                        "characterId": "tim",
+                        "text": "Réveillons tout le monde. Toi, va chercher l'Homme Vénérable. C'est lui qui décidera de la chose à faire. Moi, je prendrai le tambour."
+                    },
+                    {
+                        "characterId": "lesFemmes",
+                        "text": "Malheur, malheur. La paix est finie. Quel danger nous menace Malheur, malheur. Que va-t-il arriver. A nos enfants. Si gracieux. Si fragiles. Si innocents. Malheur, malheur. Que va-t-il arriver À nos hommes. Si forts. Si courageux. Si beaux. Malheur, malheur. Un grand danger nous menace."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Parle!"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "J'étais de garde cette nuit au grand piège. Je dormais."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "C'est permis."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Le bruit des chaînes et des cloches m'a réveillé. Je suis allé voir. C'est... c'est un animal que l'on n'a jamais vu par ici. Il est énorme, il ne ressemble à rien, et il s'en dégage une odeur répugnante."
+                    },
+                    {
+                        "characterId": "tim",
+                        "text": "Une odeur insoutenable. Cela m'a soulevé le cœur."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Est-il mort?"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Non. Il respire. On peut l'entendre d'ici."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Écoutons!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Vivant! Malgré les piques aiguisées au fond du piège! Femmes, rentrez chez vous. Hommes, suivez-moi!"
+                    },
+                    {
+                        "characterId": "lesHommes",
+                        "text": "Nous sommes les hommes. Au grand courage. Nous défendrons nos femmes. Nos enfants. Nos maisons. Contre tout danger. Contre toute menace. Rien ne nous fait peur. Nous vaincrons. Nous sommes les hommes."
+                    },
+                    {
+                        "characterId": "lesHommes",
+                        "text": "Qu'il est laid! Puant! Visqueux! Répugnant! Monstrueux! Abominable!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Levez vos lances!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Retirez vos lances!"
+                    },
+                    {
+                        "characterId": "lesHommes",
+                        "text": "Pas de sang! Pas de sang! Pas de sang!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Vos arcs! Vos flèches empoisonnées!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Des pierres!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Prions!"
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "Dieu unique de notre monde unique. Dieu éternel de notre monde éternel. Viens à notre aide. Nous sommes devenus faibles et vulnérables. Nous nous prosternons dans la poussière. Relève tes enfants. Notre douleur est grande. Oh! nous avons besoin de Toi. Dieu unique de notre monde unique. Dieu éternel de notre monde éternel."
+                    }
+                ]
+            },
+            {
+                "number": "2",
+                "lines": [
+                    {
+                        "characterId": "nob",
+                        "text": "Tout a changé ici. L'air, les gens, tout, toute la vie. J'ai peur, Lil, je sens qu'un grand danger nous menace."
+                    },
+                    {
+                        "characterId": "lil",
+                        "text": "Quel danger? Au contraire, la vie devient de plus en plus belle."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Le Monstre grandit, Lil, il grandit sans cesse, tu le sais bien."
+                    },
+                    {
+                        "characterId": "lil",
+                        "text": "Mais qu'est-ce que cela peut faire? Il grandit. Il y a assez de place."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "De la place, peut-être, il y en a encore assez, oui. Mais le Monstre mange de plus en plus, il sent de plus en plus fort, et il respire de plus en plus bruyamment. Et... il mange n'importe quoi, même des hommes."
+                    },
+                    {
+                        "characterId": "lil",
+                        "text": "Oh, tu es agaçant! Il ne l'a pas fait exprès. C'était... ce n'étaient que des imprudents qui se sont trouvés juste devant sa bouche. Il a refermé sa bouche, c'est tout. Il n'est certainement pas méchant. Et il ne peut même pas se déplacer."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "De temps à autre il écrase un enfant sous ses pattes..."
+                    },
+                    {
+                        "characterId": "lil",
+                        "text": "Il est lourd et maladroit, c'est tout. Il ne le fait pas par méchanceté. Les mères n'ont qu'à surveiller leurs enfants un peu mieux."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "C'est curieux, comme tout le monde le défend. Même toi."
+                    },
+                    {
+                        "characterId": "lil",
+                        "text": "Oui, je le défends, Nob, car je l'aime. Tout le monde l'aime, sauf toi. Parce que toi, tu n'as jamais respiré le parfum de ses fleurs merveilleuses."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "J'en ai entendu parler. On dit que quand on respire le parfum de ses fleurs, de ces fleurs qui ont poussé sur son dos hideux, oui, il paraît, qu'en respirant ces fleurs, on ressent un étrange bonheur, une félicité inconnue..."
+                    },
+                    {
+                        "characterId": "lil",
+                        "text": "Oui, Nob. Et toute peur disparaît, et toutes les angoisses et toutes les tristesses. Et même les douleurs physiques. Les vieux oublient qu'ils sont vieux, et les malades oublient leurs maladies. Il guérit tous les maux, il guérit les âmes."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Pour un moment, peut-être, pour un certain temps. Mais le Monstre grandit, Lil, n'oublie pas qu'il grandit très vite. Il a déjà pris la place de notre ancien village. Nous avons dû reconstruire nos maisons ailleurs, replanter nos jardins plus loin. Et, dans quelques mois, il faudra recommencer."
+                    },
+                    {
+                        "characterId": "lil",
+                        "text": "Il va certainement arrêter de grandir un jour, non?"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Comment le sais-tu?"
+                    },
+                    {
+                        "characterId": "lil",
+                        "text": "Mais... cela ne peut pas être autrement."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Pourquoi pas?"
+                    },
+                    {
+                        "characterId": "lil",
+                        "text": "Parce que... parce que... il n'y aura plus de place... pour nous."
+                    },
+                    {
+                        "characterId": "lil",
+                        "text": "Tu me fais peur, Nob. Tu vois tout en noir. Tu verras, tout va s'arranger pour le mieux."
+                    }
+                ]
+            },
+            {
+                "number": "4",
+                "lines": [
+                    {
+                        "characterId": "nob",
+                        "text": "J'aimerais te parler, Homme Vénérable."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Approche-toi, mon fils. Parle."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Il y a un certain temps, j'ai fait un rêve, mon père, que je ne parviens pas à oublier."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Raconte-le-moi, mon fils."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "D'abord, c'était un cauchemar. Il y avait des monstres, des petits monstres qui sont nés de l'affreux animal au dos fleuri. Des hommes m'ont mis dans un cercueil et ils ont lancé les monstres sur moi, pour qu'ils se nourrissent de mon corps. Mais je me suis libéré, j'étais devenu un grand oiseau, j'avais des ailes et je me suis envolé vers un autre monde."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Il n'existe pas d'autre monde, fils."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Le monde... après la vie?"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "La mort?"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "La mort, puis l'autre monde?"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Pourquoi ne me réponds-tu pas, Homme Vénérable?"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Qu'attends-tu de moi?"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "J'aimerais partir. Comme dans mon rêve. Dans ce monde qui attend nos âmes après la vie. Dans ce monde dont tu nous as tant parlé..."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Pourquoi? Pourquoi veux-tu partir, pourquoi veux-tu mourir, mon fils?"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "À cause du Monstre. Je le hais, je le hais aussi fort que le premier jour."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Tout le monde l'aime, pourtant."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Toi aussi, mon père?"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Non, pas moi. Je ne l'aime pas. Je sais qu'il causera notre perte, il nous détruira."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Alors, pourquoi n'agis-tu pas? Pourquoi ne fais-tu pas quelque chose?"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Mais que faire, mon fils? Nous avons tout essayé au début. Et, à présent, les gens sont tous pour lui. Je suis seul et vieux."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Non, tu n'es pas seul. Je suis avec toi."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Tu veux partir..."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Je ne peux plus vivre ici. Je veux vivre dans le monde qui suit la mort. Ce monde dont tu nous as tant parlé, ce monde, mon père, existe-t-il?"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Réponds, mon père. Je dois le savoir. J'ai le droit de le savoir."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Oui, tu as le droit de le savoir. Ce monde existe, mon fils, mais, je le crains, dans ce monde, il n'y a rien d'autre que la nuit."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Alors, mon rêve... Que signifie-t-il, mon rêve?"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Ton rêve signifie que tu retrouveras ce monde de lumière, tu le retrouveras non pas après la mort, mais ici, dans notre monde. Ton rêve signifie que tu vaincras le Monstre.."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Moi? Pourquoi moi?"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Dis-moi, mon fils, as-tu déjà respiré le parfum de ses fleurs merveilleuses?"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Jamais, mon père."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "C'est cela, ta force. Tu es le seul avec moi qui ne l'as pas fait."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Et je ne le ferai jamais, parce que je sais que ce serait ma perte, que je me mettrais à l'aimer comme les autres, et je serais vaincu."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "C'est toi qui vaincras, mon fils, j'en ai la certitude. Tu remplis mon âme d'espoir, je ne me sens plus seul. Avec ton courage et avec ma sagesse nous serons plus forts que le Monstre."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Mais que pouvons-nous contre lui?"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Rentre chez toi en paix, mon fils. Je vais réfléchir. Quand l'heure sera venue, je t'appellerai."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "J'attendrai ton appel avec impatience. Tu m'as rendu le courage, tu m'as rendu la vie."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Dans mes yeux se reflètent, Les couleurs du ciel, Dans mes cheveux jouent, Les doigts de la brise, Dans mon cœur renaissent, La joie et la paix, Les tourments de mon âme, Cèdent à l'espoir, La terre sera rendue, Aux hommes de notre monde, Ils y feront pousser, Des fleurs pures et belles."
+                    }
+                ]
+            },
+            {
+                "number": "5",
+                "lines": [
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Je vous ai choisis pour votre jeunesse et votre courage. J'ai pris une décision importante. Avant de vous en parler, je veux savoir si je peux compter sur vous sans restriction."
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "Oui, Homme Vénérable."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Bien. Je vous permets de vous asseoir, car ce sera long. Vous le savez tous, le Monstre grandit à une vitesse effrayante. Nous devons encore une fois rebâtir les maisons ailleurs et replanter nos jardins, car il a pris la place de notre deuxième village. Cela ne peut plus continuer ainsi. Si le Monstre n'arrête pas de grandir, nous ne saurons plus où aller. Nous n'aurons plus de place pour vivre."
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "Plus de place... pour vivre!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Il nous faut donc agir et empêcher le Monstre de grandir."
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "L'empêcher de grandir!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Par l'observation et par la réflexion, j'ai trouvé la seule solution possible."
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "Il l'a trouvée!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Le seul moyen d'empêcher le Monstre de grandir, c'est de le priver de sa nourriture préférée qui est la chair humaine."
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "La chair humaine!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Oui. J'ai remarqué qu'après avoir englouti un être humain qui se trouvait devant sa bouche, le Monstre grandissait immédiatement d'une façon incroyable. Par contre, quand il n'avait que sa nourriture habituelle pendant un certain temps, non seulement il gardait sa taille normale, mais il rapetissait visiblement. Ma conclusion est la suivante : si nous privons le Monstre de chair humaine et de toute nourriture pendant un laps de temps suffisamment long, sa taille se réduira de plus en plus, jusqu'à la disparition totale."
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "Disparition totale!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Pour cela, il faut empêcher les gens de s'en approcher. Je sais que cela ne plaira pas à tout le monde. Les gens sont habitués au Monstre, ils en ont besoin. Ils aiment respirer le poison de ses fleurs."
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "Le poison?"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Oui, c'est un poison qui engourdit leur esprit, qui leur procure une sensation de bonheur."
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "Un immense bonheur!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Une illusion de bonheur, très peu durable. Même parmi vous, il y en a certainement qui ne voudraient plus s'en passer."
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "Nous en passer? Pour toujours?"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Oui, pour toujours. Il nous faut choisir. La mort pour tous, ou la disparition du Monstre."
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "Pas la mort! Pas la mort!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Ceux qui sont pour le Monstre peuvent partir. Ils peuvent encore retourner près de lui, respirer le venin de ses fleurs, jusqu'au vertige total qui les fera tomber devant sa bouche entrouverte. Allez le nourrir de votre corps! Allez le faire gonfler encore et encore!"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Tu penses donc, Homme Vénérable, que c'est le parfum des fleurs qui fait tomber les hommes inanimés devant la bouche du Monstre?"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Certainement. C'est une ruse du Monstre qui ne peut pas bouger, qui ne peut pas se déplacer. C'est ainsi qu'il se procure sa nourriture préférée, la seule qui lui convienne véritablement."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Vous l'entendez? Vous comprenez? C'est votre corps qu'il veut. L'immense bonheur qu'il vous donne, c'est pour vous attirer dans sa bouche immonde."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Nous devons choisir. Que ceux qui veulent partir, partent."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Vous restez tous. Merci. Je vais vous exposer mes plans. Nous devons faire vite, car le moment est propice. Les gens doivent de nouveau rebâtir leurs maisons ailleurs, ils sont mal disposés envers le Monstre. Ils commencent à avoir peur. La première chose à faire est de construire un mur de pierre autour du Monstre. Que toute la population y participe. On leur dira que c'est pour empêcher le Monstre de grandir. Ils seront d'accord. Seconde chose: ramassez toutes les armes, jetez-les dans le précipice."
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "Désarmer les hommes?"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Oui. Par la force, ou par la ruse. Les désarmer tous. Sauf vous. Vous garderez vos armes, car vous en aurez besoin. Vous en aurez besoin, car à l'avenir vous devrez tirer sur quiconque s'approchera du mur que nous aurons bâti autour du Monstre. Tirer sans pitié, sans considération. Sur vos parents, sur vos amis, sans distinction."
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "Sans distinction!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Même parmi vous, ceux qui faibliront, ceux qui voudront traverser le mur... Les autres doivent les tuer sans hésitation."
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "Sans hésitation!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "C'est cruel, je le sais. Mais autrement nous sommes tous perdus. M'avez-vous compris?"
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "Oui, Homme Vénérable."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Êtes-vous prêts à accomplir ce travail sanglant pour sauver notre monde?"
+                    },
+                    {
+                        "characterId": "tous",
+                        "text": "Nous sommes prêts. Nous tuerons. Nous tuerons. Sans faiblesse. Sans pitié. Nous tuerons. Pour sauver notre monde. Nous tuerons des hommes. Pour que d'autres vivent. Pour que le Monstre meure. Sans faiblesse. Sans pitié. Nous tuerons."
+                    }
+                ]
+            },
+            {
+                "number": "6",
+                "lines": [
+                    {
+                        "characterId": "nob",
+                        "text": "Arrête-toi, homme! N'y va pas!"
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "Aie pitié."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "De qui?"
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "De moi."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Je ne te connais pas. J'ai déjà tué mes parents. La jeune fille que j'aimais, Lil, je l'ai tuée aussi. J'ai tué mon meilleur ami, Tim. J'ai tué des enfants. Pourquoi aurais-je pitié de toi?"
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "Je sais. Tu es implacable. Tu as tué aussi tes amis de garde."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Ils faiblissaient. Ils voulaient s'approcher du Monstre. Je les ai tués. Tous. Pour que le Monstre disparaisse. Et j'ai réussi. Dans quelques jours, il ne restera plus rien de lui."
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "A quoi cela servira-t-il? Au village non plus, il ne reste plus personne."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Que dis-tu?"
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "Je suis le dernier habitant du village. Tes camarades et toi vous avez tué tout le monde."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Tous?"
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "Il reste l'Homme Vénérable... et toi... et moi. Mais je ne veux plus vivre. A quoi sert-il de vivre dans la solitude, sans bonheur!"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Bonheur?"
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "Toi, tu ne l'as jamais connu. Le bonheur qui venait du parfum des fleurs...."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Non, je ne l'ai jamais connu."
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "C'est pour cela que tu es sans pitié. Tu ne connais que la haine. Tu es rempli de haine."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Sans la haine, je n'aurais pas pu faire ce que j'ai fait. Il fallait que j'aie cette haine de lui, pour le vaincre."
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "Et tu es devenu toi-même un monstre. Tu ne fais que tuer depuis des mois. Tu as exterminé ton peuple."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "J'ai sauvé notre monde."
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "Tu l'as sauvé pour toi seul. Il est à toi, maintenant, le monde! Et que comptes-tu en faire?"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Tu es encore en vie, toi aussi. Pars, ou je te tue!"
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "Je ne te demande pas de me laisser vivre, puisque je suis venu ici pour mourir. J'ai perdu tous ceux que j'aimais. Je voudrais les rejoindre dans la mort. Mais laisse-moi mourir auprès du Monstre. Laisse-moi respirer encore une fois le parfum de ses fleurs. Laisse-moi connaître le bonheur une dernière fois."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Et le Monstre te mangera et il grandira de nouveau. Et on devrait attendre encore des semaines ou des mois pour qu'il disparaisse. Alors que sa disparition est maintenant si proche."
+                    },
+                    {
+                        "characterId": "unHomme",
+                        "text": "Qu'est-ce que cela peut faire à présent? Quelques semaines ou quelques mois de plus? En quoi cela peut-il changer quelque chose? Pour qui? Pour quoi?"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Pour moi. Je veux que mon travail soit fini. Que le Monstre disparaisse. Je n'en peux plus. J'ai trop tué. J'ai trop attendu. Arrête, te dis-je! Ne t'approche pas! Ne t'approche pas du mur! Je tire!"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "J'ai gagné! J'ai gagné! Le Monstre n'est plus!"
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Approche-toi, Nob. Je vais mourir."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "C'est fini, mon père."
+                    },
+                    {
+                        "characterId": "hommeVenerable",
+                        "text": "Oui, c'est fini. Ton rêve s'est réalisé, Nob. Tu vivras dans un monde sans monstre. Seul. Puis tu mourras. Seul. Seul, Nob, tu entends? Le Monstre a gagné, Nob. Il nous a tués. Il a tué... la vie. Je me suis trompé, peut-être. Aurais-je dû laisser mourir les gens dans le bonheur illusoire des fleurs? Peut être. Je ne sais plus. C'est trop tard. Je me suis trompé, oui, mais c'est trop tard."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "J'ai vaincu le Monstre! J'ai gagné! C'est moi qui ai gagné!"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Venez, venez tous! J'ai gagné, j'ai vaincu le Monstre! On vivra de nouveau dans la joie, dans la paix. Venez tous! On va faire une grande fête. Venez mes amis, jeunes et vieux! Nous chanterons, nous danserons. Lil, où es-tu? Viens danser, Lil! Tim, où es-tu? Viens chanter avec moi! Venez tous! Venez!"
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Mais où sont-ils tous? Où sont-ils partis? Je ne comprends pas. Où sont Lil, Tim, les autres? Je ne comprends pas. Voici ma guitare. Voici ma guitare."
+                    },
+                    {
+                        "characterId": "nob",
+                        "text": "Cela s'est passé ici ou ailleurs. Quelque part. Une fois. Aujourd'hui hier ou demain."
+                    }
+                ]
+            }
+        ]
+    }
+}

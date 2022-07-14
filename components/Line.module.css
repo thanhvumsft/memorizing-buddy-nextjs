@@ -1,0 +1,30 @@
+
+
+
+.line, .highlightedLine{
+
+	list-style: none outside none;
+    margin-bottom: 15px;
+}
+
+.character{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.highlightedLine .character{
+    background-color: pink;
+}
+.highlightedLine .textShow{
+    background-color: yellow;
+}
+
+.textShow, .revealerShow
+{
+    display: inline;
+}
+
+.textHide, .revealerHide
+{
+    display:none;
+}
