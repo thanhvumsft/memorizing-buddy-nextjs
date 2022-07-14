@@ -4,17 +4,21 @@ import styles from "./MemorizingBuddy.module.css";
 import lemonstre from "../data/lemonstre";
 import romeoandjuliet from "../data/romeoandjuliet";
 import bigbangtheory from "../data/bigbangtheory";
+import library from "../data/library";
 import Line from "../components/Line";
 import Cursor from '../components/Cursor';
 import { Avatar } from "../components/Avatar";
-
+import { textVide } from 'text-vide';
 
 export function MemorizingBuddy() {
-    
-    const [textToPractice, setTextToPractice] = useState(bigbangtheory);
-    const [allScript, setAllScript] = useState(null);
-    const [isHiddenLines, setIsHiddenLines] = useState(false); //false is the default value i want to pass
+
+
+    const [libraryOfScripts, setLibraryOfScripts] = useState([]);
+    const [script, setScript] = useState(null);
     const [cast, setCast] = useState([]);
+    const [isHiddenLines, setIsHiddenLines] = useState(false); 
+    const [isOptimizedReading, setIsOptimizedReading] = useState(false); 
+    const [isAnnotationMode, setIsAnnotationMode] = useState(false); 
     const lineIncrement = 0;
 
 
@@ -25,23 +29,34 @@ export function MemorizingBuddy() {
     const hasMoreUsers = others.length > 3;
     const updateMyPresence = useUpdateMyPresence();
 
-    const refreshScreen = (text) => {
-        console.log("text: " + text.script.title)
-        setTextToPractice(text)
-        //The only way for me see the text change live is by adding that step, which feels weird
-        textToPractice=text;
-        console.log("textToPractice.script.title: " + textToPractice.script.title)
-        setAllScript(textToPractice.script)
-        setCast(textToPractice.script.cast.map(value => (
-            { 
-                    id: value.id, 
-                    displayName: value.displayName, 
-                    isHighlighted: false 
-            })))
+
+
+    const onScriptSelected = (event) => {
+        console.log("Select value: " + event.target.value)
+        const scriptId = event.target.value;
+        loadScript(scriptId);
     }
 
+    const loadScript = (scriptId) =>{
+        const newScript = null;
+
+        if(scriptId=="lemonstre") {newScript=lemonstre}
+        else if(scriptId=="romeoandjuliet") {newScript=romeoandjuliet}
+        else if(scriptId=="bigbangtheory") {newScript=bigbangtheory}
+        else {newScript=bigbangtheory}
+
+        setScript(newScript.script)
+        setCast(newScript.script.cast.map(value => (
+            {
+                id: value.id,
+                displayName: value.displayName,
+                isHighlighted: false
+            })))
+    };
+
     useEffect(() => {
-        refreshScreen(textToPractice)
+        setLibraryOfScripts(library.scripts)
+        loadScript(library.scripts[0].id)
     }, []);
 
     //What's the best way to handle localization?
@@ -58,18 +73,26 @@ export function MemorizingBuddy() {
                     <legend>Options</legend>
                     <div>
                         <input
-                            type="checkbox" id="hideLines" name="hideLines" value="hide"
-                            onClick={(event) => handleHideLinesOptionClick(event)} />
+                            type="checkbox" checked={isHiddenLines} id="hideLines" name="hideLines" value="hide"
+                            onClick={(event) => onHideLinesOptionClick(event)} />
                         <label for="hideLines">
                             🧑‍🦯 Hide your lines
                         </label>
                     </div>
                     <div>
                         <input
-                            type="checkbox" id="optimizeForReading" name="optimizeForReading" value="optimizeForReading"
-                            onClick={(event) => null} />
+                            type="checkbox" checked={isOptimizedReading} id="optimizeForReading" name="optimizeForReading" value="optimizeForReading"
+                            onClick={(event) => onOptimizeForReadingClick(event)} />
                         <label for="optimizeForReading">
-                            👓 Optimize for reading <i>(Soon!)</i>
+                            👓 Optimize for reading
+                        </label>
+                    </div>
+                    <div>
+                        <input
+                            type="checkbox" checked={isAnnotationMode} id="annotationMode" name="annotationMode" value="annotationMode"
+                            onClick={(event) => onAnnotationModeClick(event)} />
+                        <label for="annotationMode">
+                            📝 Activate annotation mode
                         </label>
                     </div>
                     <div>
@@ -83,7 +106,9 @@ export function MemorizingBuddy() {
         );
     }
 
-    const handleHideLinesOptionClick = (event) => { setIsHiddenLines(event.target.checked); }
+    const onHideLinesOptionClick = (event) => { setIsHiddenLines(event.target.checked); }
+    const onOptimizeForReadingClick = (event) => { setIsOptimizedReading(event.target.checked); }
+    const onAnnotationModeClick = (event) => { setIsAnnotationMode(event.target.checked); }
 
     const handleHighlightOptionClick = (event, characterId) => {
         const newCast = cast.slice();
@@ -96,7 +121,7 @@ export function MemorizingBuddy() {
         return (
             <div>
                 <input
-                    type="checkbox" id={character.id} name={character.id} value={character.id}
+                    type="checkbox" checked={character.isHighlighted} id={character.id} name={character.id} value={character.id}
                     onClick={(event) => handleHighlightOptionClick(event, character.id)} />
                 <label for={character.id}>
                     {character.displayName}
@@ -109,9 +134,24 @@ export function MemorizingBuddy() {
     const renderScript = () => {
         return (
             <div>
-                <h4>{allScript.title}</h4>
-                <div>{renderSections(allScript.sections)}</div>
+                <h4>{script.title}</h4>
+                <div>{renderSections(script.sections)}</div>
 
+            </div>
+        );
+    }
+
+    const renderAllScriptsSelector = () => {
+        return (
+            <div>
+                <label for="scriptSelector">Choose your script to practice: </label>
+                <select id="scriptSelector" onChange={(event) => onScriptSelected(event)} >
+                    {libraryOfScripts.map((script) => {
+                        return (
+                            <option value={script.id}>{script.displayName}</option>
+                        );
+                    })}
+                </select>
             </div>
         );
     }
@@ -124,13 +164,12 @@ export function MemorizingBuddy() {
                         return (
                             <div>
                                 <h4>Act {section.number}</h4>
-                                <ul>{section.lines.map((line) => 
-                                    {
-                                        const newIncrementValue = lineIncrement;
-                                        lineIncrement=newIncrementValue+1;
-                                        return (renderLine(line));
-                                    }
-                                        )}</ul>
+                                <ul>{section.lines.map((line) => {
+                                    const newIncrementValue = lineIncrement;
+                                    lineIncrement = newIncrementValue + 1;
+                                    return (renderLine(line));
+                                }
+                                )}</ul>
                             </div>
                         );
                     })
@@ -148,33 +187,15 @@ export function MemorizingBuddy() {
                 text={line.text}
                 isHighlighted={currentCharacter.isHighlighted}
                 hideHighlightedLines={isHiddenLines}
+                optimizeReading={isOptimizedReading}
+                annotationMode={isAnnotationMode}
                 lineId={lineIncrement}
             />
         )
     }
 
-    const handleScriptSelectorChange = (event) => { 
 
-        console.log("Select value: " + event.target.value)
-        if(event.target.value=="lemonstre")
-        {
-            console.log("Case lemonstre");
-            refreshScreen(lemonstre)
-        ;}
-        else if(event.target.value=="romeoandjuliet")
-        {
-            console.log("Case romeoandjuliet");
-            refreshScreen(romeoandjuliet)
-        ;}
-        else if(event.target.value=="bigbangtheory")
-        {
-            console.log("Case bigbangtheory");
-            refreshScreen(bigbangtheory)
-        ;}
-    }
-
-
-    if (allScript == null) {
+    if (script == null) {
         return <div>Loading...</div>
     }
 
@@ -202,14 +223,8 @@ export function MemorizingBuddy() {
                 </div>
             </main>
             <h1>Memorizing Buddy</h1>
-            <div>
-                <label for="scriptSelector">Choose your script to practice: </label>
-                <select id="scriptSelector" onChange={(event) => handleScriptSelectorChange(event)} >
-                    <option value="bigbangtheory">🇺🇸 Big Bang Theory</option>
-                    <option value="romeoandjuliet">🇬🇧 Romeo & Juliet</option>
-                    <option value="lemonstre">🇫🇷 Le Monstre</option>
-                </select>
-            </div>
+
+            <div>{renderAllScriptsSelector()}</div>
             <div>{renderOptions()}</div>
             <div>{renderScript()}</div>
         </div>

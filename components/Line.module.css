@@ -5,11 +5,14 @@
 
 	list-style: none outside none;
     margin-bottom: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    word-spacing: 1px;
 }
-
 .character{
-    font-weight: bold;
     text-transform: uppercase;
+    color:grey;
 }
 
 .highlightedLine .character{
@@ -27,4 +30,23 @@
 .textHide, .revealerHide
 {
     display: none;
+}
+
+.annotationShow, .annotationHide
+{
+    border: 1px dashed #FF0000;
+    color: #FF0000;
+    font-style: italic;
+}
+
+.annotationHide
+{
+    display: none;
+}
+ 
+.annotationText{
+    background-color: #f5f7f6;
+    color: grey;
+    font-size:small;
+    font-style: italic;
 }

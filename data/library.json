@@ -1,0 +1,16 @@
+{
+    "scripts": [
+        {
+            "id": "lemonstre",
+            "displayName": "🇫🇷 Le Monstre"
+        },
+        {
+            "id": "romeoandjuliet",
+            "displayName": "🇬🇧 Romeo & Juliet"
+        },
+        {
+            "id": "bigbangtheory",
+            "displayName": "🇺🇸 Big Bang Theory"
+        }
+    ]
+}
