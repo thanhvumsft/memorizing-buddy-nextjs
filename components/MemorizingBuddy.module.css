@@ -1,5 +1,7 @@
 .header {
   display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .appTitle {
@@ -8,6 +10,7 @@
 .avatarsSection {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 
