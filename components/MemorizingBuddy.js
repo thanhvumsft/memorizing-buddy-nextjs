@@ -16,9 +16,9 @@ export function MemorizingBuddy() {
     const [libraryOfScripts, setLibraryOfScripts] = useState([]);
     const [script, setScript] = useState(null);
     const [cast, setCast] = useState([]);
-    const [isHiddenLines, setIsHiddenLines] = useState(false); 
-    const [isOptimizedReading, setIsOptimizedReading] = useState(false); 
-    const [isAnnotationMode, setIsAnnotationMode] = useState(false); 
+    const [isHiddenLines, setIsHiddenLines] = useState(false);
+    const [isOptimizedReading, setIsOptimizedReading] = useState(false);
+    const [isAnnotationMode, setIsAnnotationMode] = useState(false);
     const lineIncrement = 0;
 
 
@@ -37,13 +37,13 @@ export function MemorizingBuddy() {
         loadScript(scriptId);
     }
 
-    const loadScript = (scriptId) =>{
+    const loadScript = (scriptId) => {
         const newScript = null;
 
-        if(scriptId=="lemonstre") {newScript=lemonstre}
-        else if(scriptId=="romeoandjuliet") {newScript=romeoandjuliet}
-        else if(scriptId=="bigbangtheory") {newScript=bigbangtheory}
-        else {newScript=bigbangtheory}
+        if (scriptId == "lemonstre") { newScript = lemonstre }
+        else if (scriptId == "romeoandjuliet") { newScript = romeoandjuliet }
+        else if (scriptId == "bigbangtheory") { newScript = bigbangtheory }
+        else { newScript = bigbangtheory }
 
         setScript(newScript.script)
         setCast(newScript.script.cast.map(value => (
@@ -62,45 +62,51 @@ export function MemorizingBuddy() {
     //What's the best way to handle localization?
     const renderOptions = () => {
         return (
-            <div>
-                <fieldset className={styles.fieldset}>
+            <div className={styles.optionsSection}>
+                <fieldset className={styles.fieldsetOption}>
+                    <legend>Select the script to practice</legend>
+                    <div>{renderAllScriptsSelector()}</div>
+                </fieldset>
+                <fieldset className={styles.fieldsetOption}>
                     <legend>Who are you?</legend>
                     <ul>
-                        <ul>{cast.map(character => renderOptionCharacter(character))}</ul>
+                        {cast.map(character => renderOptionCharacter(character))}
                     </ul>
                 </fieldset>
-                <fieldset className={styles.fieldset}>
+                <fieldset className={styles.fieldsetOption}>
                     <legend>Options</legend>
-                    <div>
-                        <input
-                            type="checkbox" checked={isHiddenLines} id="hideLines" name="hideLines" value="hide"
-                            onClick={(event) => onHideLinesOptionClick(event)} />
-                        <label for="hideLines">
-                            🧑‍🦯 Hide your lines
-                        </label>
-                    </div>
-                    <div>
-                        <input
-                            type="checkbox" checked={isOptimizedReading} id="optimizeForReading" name="optimizeForReading" value="optimizeForReading"
-                            onClick={(event) => onOptimizeForReadingClick(event)} />
-                        <label for="optimizeForReading">
-                            👓 Optimize for reading
-                        </label>
-                    </div>
-                    <div>
-                        <input
-                            type="checkbox" checked={isAnnotationMode} id="annotationMode" name="annotationMode" value="annotationMode"
-                            onClick={(event) => onAnnotationModeClick(event)} />
-                        <label for="annotationMode">
-                            📝 Activate annotation mode
-                        </label>
-                    </div>
-                    <div>
-                        <button>👤 Practice on your own <i>(Soon!)</i></button>
-                    </div>
-                    <div>
-                        <button>👥 Start a group practice <i>(Soon!)</i></button>
-                    </div>
+                    <ul>
+                        <li>
+                            <input
+                                type="checkbox" checked={isHiddenLines} id="hideLines" name="hideLines" value="hide"
+                                onClick={(event) => onHideLinesOptionClick(event)} />
+                            <label for="hideLines">
+                                🧑‍🦯 Hide your lines
+                            </label>
+                        </li>
+                        <li>
+                            <input
+                                type="checkbox" checked={isOptimizedReading} id="optimizeForReading" name="optimizeForReading" value="optimizeForReading"
+                                onClick={(event) => onOptimizeForReadingClick(event)} />
+                            <label for="optimizeForReading">
+                                👓 Optimize for reading
+                            </label>
+                        </li>
+                        <li>
+                            <input
+                                type="checkbox" checked={isAnnotationMode} id="annotationMode" name="annotationMode" value="annotationMode"
+                                onClick={(event) => onAnnotationModeClick(event)} />
+                            <label for="annotationMode">
+                                📝 Activate annotation mode
+                            </label>
+                        </li>
+                        <li>
+                            <button>👤 Practice on your own <i>(Soon!)</i></button>
+                        </li>
+                        <li>
+                            <button>👥 Start a group practice <i>(Soon!)</i></button>
+                        </li>
+                    </ul>
                 </fieldset>
             </div>
         );
@@ -119,24 +125,23 @@ export function MemorizingBuddy() {
 
     const renderOptionCharacter = (character) => {
         return (
-            <div>
+            <li>
                 <input
                     type="checkbox" checked={character.isHighlighted} id={character.id} name={character.id} value={character.id}
                     onClick={(event) => handleHighlightOptionClick(event, character.id)} />
                 <label for={character.id}>
                     {character.displayName}
                 </label>
-            </div>
+            </li>
         );
     }
 
 
     const renderScript = () => {
         return (
-            <div>
-                <h4>{script.title}</h4>
+            <div className={styles.script}>
+                <h2>{script.title}</h2>
                 <div>{renderSections(script.sections)}</div>
-
             </div>
         );
     }
@@ -144,7 +149,6 @@ export function MemorizingBuddy() {
     const renderAllScriptsSelector = () => {
         return (
             <div>
-                <label for="scriptSelector">Choose your script to practice: </label>
                 <select id="scriptSelector" onChange={(event) => onScriptSelected(event)} >
                     {libraryOfScripts.map((script) => {
                         return (
@@ -162,8 +166,8 @@ export function MemorizingBuddy() {
                 {
                     sections.map((section) => {
                         return (
-                            <div>
-                                <h4>Act {section.number}</h4>
+                            <div className={styles.section}>
+                                <h3>Act {section.number}</h3>
                                 <ul>{section.lines.map((line) => {
                                     const newIncrementValue = lineIncrement;
                                     lineIncrement = newIncrementValue + 1;
@@ -194,40 +198,33 @@ export function MemorizingBuddy() {
         )
     }
 
-
     if (script == null) {
         return <div>Loading...</div>
     }
 
     return (
         <div>
-            <main className="flex place-items-center place-content-center select-none">
-                <div className="flex pl-3">
-                    {others.slice(0, 3).map(({ connectionId, info }) => {
-                        return (
-                            <Avatar
-                                key={connectionId}
-                                picture={info.picture}
-                                name={info.name}
-                            />
-                        );
-                    })}
+        <div className={styles.header}>
+            <h1 className={styles.appTitle}>Memorizing Buddy</h1>
+            <div className={styles.avatarsSection}>
+                {others.map(({ connectionId, info }) => {
+                    return (
+                        <Avatar
+                            key={connectionId}
+                            picture={info.picture}
+                            name={info.name}
+                        />
+                    );
+                })}
 
-                    {hasMoreUsers && <div className={styles.more}>+{others.length - 3}</div>}
+                {currentUser && (
+                        <Avatar picture={currentUser.info?.picture} name="You" />
+                )}
+            </div>
+            </div>
 
-                    {currentUser && (
-                        <div className="relative ml-8 first:ml-0">
-                            <Avatar picture={currentUser.info?.picture} name="You" />
-                        </div>
-                    )}
-                </div>
-            </main>
-            <h1>Memorizing Buddy</h1>
-
-            <div>{renderAllScriptsSelector()}</div>
             <div>{renderOptions()}</div>
             <div>{renderScript()}</div>
         </div>
-
     );
 }
