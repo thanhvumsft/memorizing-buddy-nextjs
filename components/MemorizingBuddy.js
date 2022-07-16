@@ -62,18 +62,18 @@ export function MemorizingBuddy() {
     //What's the best way to handle localization?
     const renderOptions = () => {
         return (
-            <div className={styles.optionsSection}>
-                <fieldset className={styles.fieldsetOption}>
+            <div className={styles.sectionOptions}>
+                <fieldset className={styles.fsOptionScript}>
                     <legend>Select the script to practice</legend>
                     <div>{renderAllScriptsSelector()}</div>
                 </fieldset>
-                <fieldset className={styles.fieldsetOption}>
+                <fieldset className={styles.fsOptionWho}>
                     <legend>Who are you?</legend>
                     <ul>
                         {cast.map(character => renderOptionCharacter(character))}
                     </ul>
                 </fieldset>
-                <fieldset className={styles.fieldsetOption}>
+                <fieldset className={styles.fsOptionFeatures}>
                     <legend>Options</legend>
                     <ul>
                         <li>
@@ -139,7 +139,7 @@ export function MemorizingBuddy() {
 
     const renderScript = () => {
         return (
-            <div className={styles.script}>
+            <div className={styles.sectionScript}>
                 <h2>{script.title}</h2>
                 <div>{renderSections(script.sections)}</div>
             </div>
@@ -203,28 +203,34 @@ export function MemorizingBuddy() {
     }
 
     return (
-        <div>
-        <div className={styles.header}>
-            <h1 className={styles.appTitle}>Memorizing Buddy</h1>
-            <div className={styles.avatarsSection}>
-                {others.map(({ connectionId, info }) => {
-                    return (
-                        <Avatar
-                            key={connectionId}
-                            picture={info.picture}
-                            name={info.name}
-                        />
-                    );
-                })}
+        <div className={styles.container}>
+            <div className={styles.header}>
+                <h1 className={styles.appTitle}>Memorizing Buddy</h1>
+                <div className={styles.avatarsSection}>
+                    {others.map(({ connectionId, info }) => {
+                        return (
+                            <Avatar
+                                key={connectionId}
+                                picture={info.picture}
+                                name={info.name}
+                            />
+                        );
+                    })}
 
-                {currentUser && (
+                    {currentUser && (
                         <Avatar picture={currentUser.info?.picture} name="You" />
-                )}
-            </div>
+                    )}
+                </div>
             </div>
 
-            <div>{renderOptions()}</div>
-            <div>{renderScript()}</div>
+            {renderOptions()}
+
+            {renderScript()}
+
+            <div className={styles.footer}>
+                <div>Made with 🧡 by <a href="https://twitter.com/adigau31">Adrien Gaudon</a> 🎭</div>
+                <div>Powered by <a href="https://twitter.com/liveblocks">Liveblocks</a> 🧱</div>
+            </div>
         </div>
     );
 }

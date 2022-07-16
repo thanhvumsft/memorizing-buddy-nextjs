@@ -1,4 +1,18 @@
+.container{
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto auto;
+  grid-gap: 20px 0px;
+  grid-template-areas:
+    "header"
+    "options"
+    "content"
+    "footer";
+}
+
 .header {
+  grid-area: header;
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -14,27 +28,48 @@
 }
 
 
-.optionsSection {
+.sectionOptions {
+  grid-area: options;
   display: flex;
 }
-.optionsSection fieldset {
+.sectionOptions fieldset {
   width: 33%;
 }
 
-.fieldsetOption {}
+.sectionOptions {
+  grid-area: options;
+}
 
-.fieldsetOption ul {
+.sectionOptions fieldset ul {
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
 
-.script {}
+.fsOptionWho ul{
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 0 0;
+}
 
-.script ul {
+.sectionScript {
+  grid-area: content;
+}
+
+.sectionScript ul {
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
 
 .section {}
+
+.footer{
+  grid-area: footer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-items: flex-end;
+  font-style: italic;
+  font-size: 15px;
+}

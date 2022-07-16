@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import styles from "./Line.module.css";
 import { textVide } from 'text-vide';
+import Switch from '@mui/material/Switch';
 
 
 export default function Line(props) {
@@ -16,7 +17,7 @@ export default function Line(props) {
     return (
         <li>
 
-            <fieldset id={"annotationFieldset-" + props.lineId} className={ props.annotationMode ? styles.annotationShow : styles.annotationHide}>
+            <fieldset id={"annotationFieldset-" + props.lineId} className={props.annotationMode ? styles.annotationShow : styles.annotationHide}>
                 <legend for={"annotationFieldset-" + props.lineId}>Annotation</legend>
                 <textarea className={styles.annotationText}></textarea>
             </fieldset>
@@ -24,13 +25,7 @@ export default function Line(props) {
                 <span className={styles.character}>{props.displayName}</span>
                 <span>: </span>
                 <span className={props.hideHighlightedLines && props.isHighlighted ? styles.revealerShow : styles.revealerHide}>
-                    (<label for={"revealer-" + props.lineId}>
-                        👁&nbsp;
-                        <input
-                            type="checkbox" id={"revealer-" + props.lineId} name={"revealer-" + props.lineId} value={"revealer-" + props.lineId}
-                            onClick={(event) => handleRevealerButtonClick(event)} />
-                        )&nbsp;
-                    </label>
+                    <Switch id={"revealer-" + props.lineId} size="small" onClick={(event) => handleRevealerButtonClick(event)} />
                 </span>
                 <span className={isTextVisible ? styles.textShow : styles.textHide} dangerouslySetInnerHTML={{ __html: props.optimizeReading ? textVide(props.text) : props.text }} />
             </div>
