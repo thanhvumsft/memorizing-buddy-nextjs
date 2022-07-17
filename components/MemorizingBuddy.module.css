@@ -62,8 +62,6 @@
   list-style-type: none;
 }
 
-.section {}
-
 .footer{
   grid-area: footer;
   display: flex;
