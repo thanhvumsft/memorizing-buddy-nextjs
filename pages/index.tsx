@@ -2,15 +2,19 @@ import React, { useMemo } from "react";
 import { MemorizingBuddy } from "../components/MemorizingBuddy";
 import { RoomProvider, useOthers, useSelf } from "../liveblocks.config";
 import { useRouter } from "next/router";
+
+import { LiveList } from "@liveblocks/client";
 import styles from "./index.module.css";
 
 
 
 export default function Page() {
-  const roomId = useOverrideRoomId("nextjs-live-avatars");
+  const roomId = useOverrideRoomId("memorizing-buddy");
 
   return (
-    <RoomProvider id={roomId}>
+    <RoomProvider
+      id={roomId}
+      initialStorage={{ annotations: new LiveList() }}>
       <MemorizingBuddy />
     </RoomProvider>
   );
@@ -19,11 +23,11 @@ export default function Page() {
 export async function getStaticProps() {
   const API_KEY = process.env.API_KEY;
   const API_KEY_WARNING = process.env.API_KEY_WARNING
-   
+
     ? `Add your secret key from https://liveblocks.io/dashboard/apikeys as the \`LIVEBLOCKS_SECRET_KEY\` secret in CodeSandbox.\n` +
-      `Learn more: https://github.com/liveblocks/liveblocks/tree/main/examples/nextjs-live-avatars#codesandbox.`
+    `Learn more: https://github.com/liveblocks/liveblocks/tree/main/examples/nextjs-live-avatars#codesandbox.`
     : `Create an \`.env.local\` file and add your secret key from https://liveblocks.io/dashboard/apikeys as the \`LIVEBLOCKS_SECRET_KEY\` environment variable.\n` +
-      `Learn more: https://github.com/liveblocks/liveblocks/tree/main/examples/nextjs-live-avatars#getting-started.`;
+    `Learn more: https://github.com/liveblocks/liveblocks/tree/main/examples/nextjs-live-avatars#getting-started.`;
 
   if (!API_KEY) {
     console.warn(API_KEY_WARNING);

@@ -22,12 +22,18 @@
     background-color: yellow;
 }
 
-.textShow, .revealerShow
+.textShow, .revealerShow, .showInline
 {
     display: inline;
 }
 
-.textHide, .revealerHide
+.showBlock
+{
+    display: block;
+
+}
+
+.textHide, .revealerHide, .hide
 {
     display: none;
 }
@@ -49,4 +55,16 @@
     color: grey;
     font-size:small;
     font-style: italic;
+}
+
+.othersAnnotation textarea
+{
+    border: 1px solid grey;
+    background-color: lightgrey;
+}
+
+.yoursAnnotation textarea
+{
+    border: 1px solid coral;
+    background-color: lightskyblue;
 }

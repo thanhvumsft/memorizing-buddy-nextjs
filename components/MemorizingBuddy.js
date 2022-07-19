@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelf, useOthers, useUpdateMyPresence } from "../liveblocks.config.ts";
+import { useSelf, useOthers, useUpdateMyPresence, useList } from "../liveblocks.config.ts";
 import styles from "./MemorizingBuddy.module.css";
 import lemonstre from "../data/lemonstre";
 import romeoandjuliet from "../data/romeoandjuliet";
@@ -8,10 +8,8 @@ import library from "../data/library";
 import Line from "../components/Line";
 import Cursor from '../components/Cursor';
 import { Avatar } from "../components/Avatar";
-import { textVide } from 'text-vide';
 
 export function MemorizingBuddy() {
-
 
     const [libraryOfScripts, setLibraryOfScripts] = useState([]);
     const [script, setScript] = useState(null);
@@ -21,18 +19,35 @@ export function MemorizingBuddy() {
     const [isAnnotationMode, setIsAnnotationMode] = useState(false);
     const lineIncrement = 0;
 
-
     //LiveBlocks
     const others = useOthers().toArray();
     const currentUser = useSelf();
     const othersCursors = others.map((user) => user.presence?.cursor);
     const hasMoreUsers = others.length > 3;
     const updateMyPresence = useUpdateMyPresence();
-
-
+    const annotations = useList("annotations");
+    
+    const onAddOrUpdateAnnotation = (userId, lineId, text) => {
+        const annotationKey = annotations.findIndex((x)=>x.userId == userId && x.lineId==lineId);
+        if(annotationKey >= 0)
+        {
+                console.log("onAddOrUpdateAnnotation set");
+            annotations.set(annotationKey, { lineId: lineId, text: text, userId: userId });
+        }
+        else
+        {
+            console.log("onAddOrUpdateAnnotation push");
+            annotations.push({ lineId: lineId, text: text, userId: userId });
+        }
+    }
+    
+    // const onUpdateAnnotation = (annotation) => {
+    //     const annotationKey = annotations.findIndex((x)=>x.userId == annotation.userId && x.lineId==annotation.lineId);
+    //     console.log("Update annotation, key: " + annotationKey)
+    //     annotations.set(annotationKey, annotation);
+    // }
 
     const onScriptSelected = (event) => {
-        console.log("Select value: " + event.target.value)
         const scriptId = event.target.value;
         loadScript(scriptId);
     }
@@ -171,7 +186,9 @@ export function MemorizingBuddy() {
                                 <ul>{section.lines.map((line) => {
                                     const newIncrementValue = lineIncrement;
                                     lineIncrement = newIncrementValue + 1;
-                                    return (renderLine(line));
+                                    return (
+                                        renderLine(line) 
+                                        );
                                 }
                                 )}</ul>
                             </div>
@@ -183,22 +200,33 @@ export function MemorizingBuddy() {
     }
 
     const renderLine = (line) => {
+        let lineId = script.id+"-"+line.id;
         let currentCharacter = cast.findLast((character) => { return character.id == line.characterId });
+        let yourAnnotation = annotations.find((annotation)=> annotation.userId == currentUser.connectionId && annotation.lineId == lineId);
         return (
             <Line
+                id={lineId}
+
                 characterId={line.characterId}
                 displayName={currentCharacter.displayName}
-                text={line.text}
                 isHighlighted={currentCharacter.isHighlighted}
+                text={line.text}
+
+                currentUserId={currentUser.connectionId}
+                otherUsers={others!=null ? others : []}
+
                 hideHighlightedLines={isHiddenLines}
                 optimizeReading={isOptimizedReading}
                 annotationMode={isAnnotationMode}
-                lineId={lineIncrement}
+
+                yourAnnotationText={yourAnnotation != null ? yourAnnotation.text : ""}
+                othersAnnotations={annotations.filter((annotation)=> annotation.userId != currentUser.connectionId && annotation.lineId == lineId)}
+                onAddOrUpdateAnnotation={onAddOrUpdateAnnotation}
             />
         )
     }
 
-    if (script == null) {
+    if (script == null || annotations == null) {
         return <div>Loading...</div>
     }
 
@@ -225,7 +253,7 @@ export function MemorizingBuddy() {
 
             {renderOptions()}
 
-            {renderScript()}
+            {renderScript()} 
 
             <div className={styles.footer}>
                 <div>Made with 🧡 by <a href="https://twitter.com/adigau31">Adrien Gaudon</a> 🎭</div>

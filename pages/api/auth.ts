@@ -25,12 +25,15 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
 }
 
 const NAMES = [
-  "Charlie Layne",
-  "Mislav Abha",
-  "Tatum Paolo",
-  "Anjali Wanda",
-  "Jody Hekla",
-  "Emil Joyce",
-  "Jory Quispe",
-  "Quinn Elton",
+  "Bradley Danger",
+  "Clément Depres",
+  "Kilian Corredor",
+
+  "Erwan Maintenant",
+  "Leo Queguiner",
+  "Ronan Le Coupanec",
+
+  "Christophe Jallet",
+  "Talal El Karkouri",
+  "Ali Benarbia",
 ];
