@@ -99,7 +99,7 @@ export function MemorizingBuddy() {
                     <div>{renderAllScriptsSelector()}</div>
                 </fieldset>
                 <fieldset className={styles.fsOptionWho}>
-                    <legend>Data</legend>
+                    <legend>Script overview</legend>
                     <DataWidget 
                         script={script} 
                         cast={cast}
