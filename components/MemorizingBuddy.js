@@ -172,16 +172,12 @@ export function MemorizingBuddy() {
         setCast(newCast);
     }
     const onHighlightSectionClick = (event, sectionNumber) => {
-        console.log("onHighlightSectionClick");
+        
         const newSections = script.sections.slice();
-        console.log(newSections);
         var sectionKey = newSections.findIndex((x, i) => x.number == sectionNumber);
-        console.log(sectionKey);
         newSections[sectionKey].isDisplayed = event.target.checked;
-        console.log(newSections);
-        const newScript = script;
+        const newScript = {...script};
         newScript.sections = newSections ;
-        console.log(newScript);
         setScript(newScript);
     }
 
