@@ -216,7 +216,7 @@ export function MemorizingBuddy() {
         return (
             <div className={styles.sectionScript}>
                 <h2>{script.title}</h2>
-                <div>{renderSections(script.sections)}</div>
+                <div>{renderSections(script.sections.filter(f=>f.isDisplayed))}</div>
             </div>
         );
     }

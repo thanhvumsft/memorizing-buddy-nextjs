@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import styles from "./DataWidget.module.css";
 
 export default function DataWidget(props) {
-
+    let sections = props.script.sections.filter(s=>s.isDisplayed);
     let flattenedListOfLines = [];
     let flattenedListOfCharacters = [];
 
-    props.script.sections.forEach(section =>
+    sections.forEach(section =>
         section.lines.forEach(line => flattenedListOfLines.push({
             section: section.number,
             id: line.id,
@@ -32,7 +32,7 @@ export default function DataWidget(props) {
     
     let dataSummary = 
     {
-        numberOfSections: props.script.sections.length, 
+        numberOfSections: sections.length, 
         numberOfCharacters: flattenedListOfCharacters.length, 
         //TODO WHAT WOULD BE THE BEXT WAY TO GET THAT NUMBER?
         numberOfLines:flattenedListOfCharacters.map(c=> c.numberOfLines).reduce((prev, curr) => prev + curr, 0), 
