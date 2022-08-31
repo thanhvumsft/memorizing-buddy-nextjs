@@ -240,6 +240,21 @@
                         "text": "Dieu unique de notre monde unique. Dieu éternel de notre monde éternel. Viens à notre aide. Nous sommes devenus faibles et vulnérables. Nous nous prosternons dans la poussière. Relève tes enfants. Notre douleur est grande. Oh! nous avons besoin de Toi. Dieu unique de notre monde unique. Dieu éternel de notre monde éternel."
                     }
                 ]
+            },
+            {
+                "number": "2",
+                "lines": [
+                    {
+                        "id": "38",
+                        "characterId": "nob",
+                        "text": "TEST NEW ACT LINE 1"
+                    },
+                    {
+                        "id": "39",
+                        "characterId": "tim",
+                        "text": "TEST NEW ACT LINE 2"
+                    }
+                ]
             }
         ]
     }

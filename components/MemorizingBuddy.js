@@ -7,7 +7,6 @@ import bigbangtheory from "../data/bigbangtheory";
 import library from "../data/library";
 import users from "../data/users";
 import Line from "../components/Line";
-import Cursor from '../components/Cursor';
 import { Avatar } from "../components/Avatar";
 import DataWidget from './DataWidget';
 
@@ -94,17 +93,20 @@ export function MemorizingBuddy() {
             <div className={styles.sectionOptions}>
                 <fieldset className={styles.fsOptionScript}>
                     <legend>Setup your experience</legend>
-                    <div>What character are you?</div>
+                    <div>What user are you?</div>
                     <div>{renderAllUsersSelector()}</div>
                     <div>What script do you want to practice?</div>
                     <div>{renderAllScriptsSelector()}</div>
                 </fieldset>
                 <fieldset className={styles.fsOptionWho}>
                     <legend>Data</legend>
-                    <DataWidget />
+                    <DataWidget 
+                        script={script} 
+                        cast={cast}
+                    />
                 </fieldset>
                 <fieldset >
-                    <legend>What user are you?</legend>
+                    <legend>What character are you?</legend>
                     <ul>
                         {cast.map(character => renderOptionCharacter(character))}
                     </ul>
