@@ -5,51 +5,63 @@ import lemonstre from "../data/lemonstre";
 import romeoandjuliet from "../data/romeoandjuliet";
 import bigbangtheory from "../data/bigbangtheory";
 import library from "../data/library";
+import users from "../data/users";
 import Line from "../components/Line";
 import Cursor from '../components/Cursor';
 import { Avatar } from "../components/Avatar";
+import DataWidget from './DataWidget';
 
 export function MemorizingBuddy() {
 
-    const [libraryOfScripts, setLibraryOfScripts] = useState([]);
+    const [allUsers, setAllUsers] = useState([]);
+    const [allScripts, setAllScripts] = useState([]);
+    const [user, setUser] = useState(null);
     const [script, setScript] = useState(null);
     const [cast, setCast] = useState([]);
+
     const [isHiddenLines, setIsHiddenLines] = useState(false);
     const [isOptimizedReading, setIsOptimizedReading] = useState(false);
     const [isAnnotationMode, setIsAnnotationMode] = useState(false);
+
     const lineIncrement = 0;
 
     //LiveBlocks
     const others = useOthers().toArray();
     const currentUser = useSelf();
-    const othersCursors = others.map((user) => user.presence?.cursor);
-    const hasMoreUsers = others.length > 3;
-    const updateMyPresence = useUpdateMyPresence();
     const annotations = useList("annotations");
+    
+    const getUserFromId = (userId) => {
+        let userIndex = users.users.findIndex((x, i) => x.id == userId)
+        let foundUser = users.users[userIndex];
+        return foundUser;
+    }
     
     const onAddOrUpdateAnnotation = (userId, lineId, text) => {
         const annotationKey = annotations.findIndex((x)=>x.userId == userId && x.lineId==lineId);
         if(annotationKey >= 0)
         {
-                console.log("onAddOrUpdateAnnotation set");
             annotations.set(annotationKey, { lineId: lineId, text: text, userId: userId });
         }
         else
         {
-            console.log("onAddOrUpdateAnnotation push");
             annotations.push({ lineId: lineId, text: text, userId: userId });
         }
     }
-    
-    // const onUpdateAnnotation = (annotation) => {
-    //     const annotationKey = annotations.findIndex((x)=>x.userId == annotation.userId && x.lineId==annotation.lineId);
-    //     console.log("Update annotation, key: " + annotationKey)
-    //     annotations.set(annotationKey, annotation);
-    // }
 
     const onScriptSelected = (event) => {
         const scriptId = event.target.value;
         loadScript(scriptId);
+    }
+
+    const onUserSelected = (event) => {
+        const userId = event.target.value;
+        loadUser(userId);
+    }
+
+    const loadUser = (userId) => {
+        let userIndex = users.users.findIndex((x, i) => x.id == userId)
+        let newUser = users.users[userIndex];
+        setUser(newUser)
     }
 
     const loadScript = (scriptId) => {
@@ -70,7 +82,9 @@ export function MemorizingBuddy() {
     };
 
     useEffect(() => {
-        setLibraryOfScripts(library.scripts)
+        setAllUsers(users.users)
+        setAllScripts(library.scripts)
+        loadUser(users.users[Math.floor(Math.random() * users.users.length)].id)
         loadScript(library.scripts[0].id)
     }, []);
 
@@ -79,11 +93,18 @@ export function MemorizingBuddy() {
         return (
             <div className={styles.sectionOptions}>
                 <fieldset className={styles.fsOptionScript}>
-                    <legend>Select the script to practice</legend>
+                    <legend>Setup your experience</legend>
+                    <div>What character are you?</div>
+                    <div>{renderAllUsersSelector()}</div>
+                    <div>What script do you want to practice?</div>
                     <div>{renderAllScriptsSelector()}</div>
                 </fieldset>
                 <fieldset className={styles.fsOptionWho}>
-                    <legend>Who are you?</legend>
+                    <legend>Data</legend>
+                    <DataWidget />
+                </fieldset>
+                <fieldset >
+                    <legend>What user are you?</legend>
                     <ul>
                         {cast.map(character => renderOptionCharacter(character))}
                     </ul>
@@ -131,7 +152,7 @@ export function MemorizingBuddy() {
     const onOptimizeForReadingClick = (event) => { setIsOptimizedReading(event.target.checked); }
     const onAnnotationModeClick = (event) => { setIsAnnotationMode(event.target.checked); }
 
-    const handleHighlightOptionClick = (event, characterId) => {
+    const onHighlightOptionClick = (event, characterId) => {
         const newCast = cast.slice();
         var castKey = newCast.findIndex((x, i) => x.id == characterId);
         newCast[castKey].isHighlighted = event.target.checked;
@@ -143,7 +164,7 @@ export function MemorizingBuddy() {
             <li>
                 <input
                     type="checkbox" checked={character.isHighlighted} id={character.id} name={character.id} value={character.id}
-                    onClick={(event) => handleHighlightOptionClick(event, character.id)} />
+                    onClick={(event) => onHighlightOptionClick(event, character.id)} />
                 <label for={character.id}>
                     {character.displayName}
                 </label>
@@ -165,9 +186,23 @@ export function MemorizingBuddy() {
         return (
             <div>
                 <select id="scriptSelector" onChange={(event) => onScriptSelected(event)} >
-                    {libraryOfScripts.map((script) => {
+                    {allScripts.map((script) => {
                         return (
                             <option value={script.id}>{script.displayName}</option>
+                        );
+                    })}
+                </select>
+            </div>
+        );
+    }
+
+    const renderAllUsersSelector = () => {
+        return (
+            <div>
+                <select id="userSelector" value={user.id} onChange={(event) => onUserSelected(event)} >
+                    {allUsers.map((user) => {
+                        return (
+                            <option value={user.id}>{user.displayName}</option>
                         );
                     })}
                 </select>
@@ -200,9 +235,13 @@ export function MemorizingBuddy() {
     }
 
     const renderLine = (line) => {
+
         let lineId = script.id+"-"+line.id;
         let currentCharacter = cast.findLast((character) => { return character.id == line.characterId });
-        let yourAnnotation = annotations.find((annotation)=> annotation.userId == currentUser.connectionId && annotation.lineId == lineId);
+        let lineAnnotations = annotations.filter((annotation)=> annotation.lineId == lineId);
+        let currentUserAnnotation = lineAnnotations.findLast((annotation)=> annotation.userId == user.id);
+        let otherUsersAnnotations = lineAnnotations.filter((annotation)=> annotation.userId != user.id);
+
         return (
             <Line
                 id={lineId}
@@ -211,22 +250,23 @@ export function MemorizingBuddy() {
                 displayName={currentCharacter.displayName}
                 isHighlighted={currentCharacter.isHighlighted}
                 text={line.text}
-
-                currentUserId={currentUser.connectionId}
-                otherUsers={others!=null ? others : []}
+                
+                //TODO: REPLACE WITH LIVEBLOCKS' USESELF?
+                currentUser={user}
+                getUserFromId={getUserFromId}
 
                 hideHighlightedLines={isHiddenLines}
                 optimizeReading={isOptimizedReading}
                 annotationMode={isAnnotationMode}
 
-                yourAnnotationText={yourAnnotation != null ? yourAnnotation.text : ""}
-                othersAnnotations={annotations.filter((annotation)=> annotation.userId != currentUser.connectionId && annotation.lineId == lineId)}
+                currentUserAnnotation={currentUserAnnotation}
+                otherUsersAnnotations={otherUsersAnnotations}
                 onAddOrUpdateAnnotation={onAddOrUpdateAnnotation}
             />
         )
     }
 
-    if (script == null || annotations == null) {
+    if (user == null || script == null || annotations == null) {
         return <div>Loading...</div>
     }
 

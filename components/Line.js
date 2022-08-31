@@ -1,40 +1,36 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from "./Line.module.css";
 import { textVide } from 'text-vide';
 import Switch from '@mui/material/Switch';
-import { join } from 'path';
 
 export default function Line(props) {
-
     const [isTextForcedVisible, setIsTextForcedVisible] = useState(false);
-    const [otherUsers, setOtherUsers] = useState(props.otherUsers);
-    const [draft, setDraft] = useState(props.yourAnnotationText);
-
-    console.log("CONSTRUCTOR");
-    console.log(otherUsers);
 
     const onAnnotationChange = (e) => {
-        props.onAddOrUpdateAnnotation(props.currentUserId, props.id, e.target.value);
-        setDraft(e.target.value);
+        props.onAddOrUpdateAnnotation(props.currentUser.id, props.id, e.target.value);
     }
 
-    const handleRevealerButtonClick = (e) => {
+    const onRevealerButtonClick = (e) => {
         setIsTextForcedVisible(e.target.checked);
     }
 
     const isTextVisible = !props.isHighlighted || isTextForcedVisible || !props.hideHighlightedLines;
 
+    let getUserdisplayNameFromUserId = (userId) =>{
+        let user = props.getUserFromId(userId);
+        let displayName = user == null ? "Unknown" : user.displayName;
+        return displayName;
+    }
 
     return (
         <li>
 
             <div className={props.annotationMode ? styles.annotationShow : styles.annotationHide}>
-                {props.othersAnnotations.map((a)=>  {
-                    let otherUser = otherUsers.find(x=> x.connectionId == a.userId);
+                {props.otherUsersAnnotations.map((a)=>  {
                     return (
                         <fieldset id={"othersAnnotationFieldset-" + props.id} className={styles.othersAnnotation}>
-                            <legend for={"othersAnnotationFieldset-" + props.id}>{otherUser!=null ? otherUser.info.name : "Unknown"}'s notes</legend>
+                            <legend for={"othersAnnotationFieldset-" + props.id}>{getUserdisplayNameFromUserId(a.userId)}</legend>
                             <textarea
                                 className={styles.annotationText}
                                 onChange={(e) => {
@@ -45,13 +41,13 @@ export default function Line(props) {
                 )}
 
             <fieldset id={"yourAnnotationFieldset-" + props.id} className={styles.yoursAnnotation}>
-                <legend for={"yourAnnotationFieldset-" + props.id}>Your notes</legend>
+                <legend for={"yourAnnotationFieldset-" + props.id}>Your notes ({getUserdisplayNameFromUserId(props.currentUser.id)})</legend>
                 <textarea
                     className={styles.annotationText}
                     onChange={(e) => {
                         onAnnotationChange(e)
                     }}
-                    value={draft}></textarea>
+                    value={props.currentUserAnnotation != null ? props.currentUserAnnotation.text : ""}></textarea>
             </fieldset>
             </div>
             
@@ -60,7 +56,7 @@ export default function Line(props) {
                 <span className={styles.character}>{props.displayName}</span>
                 <span>: </span>
                 <span className={props.hideHighlightedLines && props.isHighlighted ? styles.revealerShow : styles.revealerHide}>
-                    <Switch id={"revealer-" + props.id} size="small" onClick={(event) => handleRevealerButtonClick(event)} />
+                    <Switch id={"revealer-" + props.id} size="small" onClick={(event) => onRevealerButtonClick(event)} />
                 </span>
                 <span className={isTextVisible ? styles.textShow : styles.textHide} dangerouslySetInnerHTML={{ __html: props.optimizeReading ? textVide(props.text) : props.text }} />
             </div>

@@ -17,23 +17,20 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     room: req.body.room,
     secret: API_KEY,
     userInfo: {
-      name: NAMES[Math.floor(Math.random() * NAMES.length)],
+      name: NAMES[Math.floor(Math.random() * NAMES.length)].name,
       picture: `/avatars/${Math.floor(Math.random() * 10)}.png`,
     },
   });
   return res.status(response.status).end(response.body);
 }
 
-const NAMES = [
-  "Bradley Danger",
-  "Clément Depres",
-  "Kilian Corredor",
-
-  "Erwan Maintenant",
-  "Leo Queguiner",
-  "Ronan Le Coupanec",
-
-  "Christophe Jallet",
-  "Talal El Karkouri",
-  "Ali Benarbia",
+export const NAMES = [
+  {	id:	"clement.depres",	name:	"Clément Depres"	},
+  {	id:	"kilian.corredor",	name:	"Kilian Corredor"	},
+  {	id:	"erwan.maintenant",	name:	"Erwan Maintenant"	},
+  {	id:	"leo.queguiner",	name:	"Leo Queguiner"	},
+  {	id:	"ronan.le.coupanec",	name:	"Ronan Le Coupanec"	},
+  {	id:	"christophe.jallet",	name:	"Christophe Jallet"	},
+  {	id:	"talal.el.karkouri",	name:	"Talal El Karkouri"	},
+  {	id:	"ali.benarbia",	name:	"Ali Benarbia"	}
 ];
