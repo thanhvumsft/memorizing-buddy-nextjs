@@ -28,21 +28,19 @@ export function MemorizingBuddy() {
     const others = useOthers().toArray();
     const currentUser = useSelf();
     const annotations = useList("annotations");
-    
+
     const getUserFromId = (userId) => {
         let userIndex = users.users.findIndex((x, i) => x.id == userId)
         let foundUser = users.users[userIndex];
         return foundUser;
     }
-    
+
     const onAddOrUpdateAnnotation = (userId, lineId, text) => {
-        const annotationKey = annotations.findIndex((x)=>x.userId == userId && x.lineId==lineId);
-        if(annotationKey >= 0)
-        {
+        const annotationKey = annotations.findIndex((x) => x.userId == userId && x.lineId == lineId);
+        if (annotationKey >= 0) {
             annotations.set(annotationKey, { lineId: lineId, text: text, userId: userId });
         }
-        else
-        {
+        else {
             annotations.push({ lineId: lineId, text: text, userId: userId });
         }
     }
@@ -70,6 +68,13 @@ export function MemorizingBuddy() {
         else if (scriptId == "romeoandjuliet") { newScript = romeoandjuliet }
         else if (scriptId == "bigbangtheory") { newScript = bigbangtheory }
         else { newScript = bigbangtheory }
+
+        newScript.script.sections = newScript.script.sections.map(value => (
+            {
+                number: value.number,
+                lines: value.lines,
+                isDisplayed: true
+            })) 
 
         setScript(newScript.script)
         setCast(newScript.script.cast.map(value => (
@@ -100,8 +105,8 @@ export function MemorizingBuddy() {
                 </fieldset>
                 <fieldset className={styles.fsOptionWho}>
                     <legend>Script overview</legend>
-                    <DataWidget 
-                        script={script} 
+                    <DataWidget
+                        script={script}
                         cast={cast}
                     />
                 </fieldset>
@@ -109,6 +114,12 @@ export function MemorizingBuddy() {
                     <legend>What character are you?</legend>
                     <ul>
                         {cast.map(character => renderOptionCharacter(character))}
+                    </ul>
+                </fieldset>
+                <fieldset >
+                    <legend>What section to display?</legend>
+                    <ul>
+                        {script.sections.map(section => renderOptionSection(section))}
                     </ul>
                 </fieldset>
                 <fieldset className={styles.fsOptionFeatures}>
@@ -154,11 +165,37 @@ export function MemorizingBuddy() {
     const onOptimizeForReadingClick = (event) => { setIsOptimizedReading(event.target.checked); }
     const onAnnotationModeClick = (event) => { setIsAnnotationMode(event.target.checked); }
 
-    const onHighlightOptionClick = (event, characterId) => {
+    const onHighlightCharacterClick = (event, characterId) => {
         const newCast = cast.slice();
         var castKey = newCast.findIndex((x, i) => x.id == characterId);
         newCast[castKey].isHighlighted = event.target.checked;
         setCast(newCast);
+    }
+    const onHighlightSectionClick = (event, sectionNumber) => {
+        console.log("onHighlightSectionClick");
+        const newSections = script.sections.slice();
+        console.log(newSections);
+        var sectionKey = newSections.findIndex((x, i) => x.number == sectionNumber);
+        console.log(sectionKey);
+        newSections[sectionKey].isDisplayed = event.target.checked;
+        console.log(newSections);
+        const newScript = script;
+        newScript.sections = newSections ;
+        console.log(newScript);
+        setScript(newScript);
+    }
+
+    const renderOptionSection = (section) => {
+        return (
+            <li>
+                <input
+                    type="checkbox" checked={section.isDisplayed} id={section.number} name={section.number} value={section.number}
+                    onClick={(event) => onHighlightSectionClick(event, section.number)} />
+                <label for={section.number}>
+                    Section {section.number}
+                </label>
+            </li>
+        )
     }
 
     const renderOptionCharacter = (character) => {
@@ -166,7 +203,7 @@ export function MemorizingBuddy() {
             <li>
                 <input
                     type="checkbox" checked={character.isHighlighted} id={character.id} name={character.id} value={character.id}
-                    onClick={(event) => onHighlightOptionClick(event, character.id)} />
+                    onClick={(event) => onHighlightCharacterClick(event, character.id)} />
                 <label for={character.id}>
                     {character.displayName}
                 </label>
@@ -219,13 +256,13 @@ export function MemorizingBuddy() {
                     sections.map((section) => {
                         return (
                             <div className={styles.section}>
-                                <h3>Act {section.number}</h3>
+                                <h3>Section {section.number}</h3>
                                 <ul>{section.lines.map((line) => {
                                     const newIncrementValue = lineIncrement;
                                     lineIncrement = newIncrementValue + 1;
                                     return (
-                                        renderLine(line) 
-                                        );
+                                        renderLine(line)
+                                    );
                                 }
                                 )}</ul>
                             </div>
@@ -238,11 +275,11 @@ export function MemorizingBuddy() {
 
     const renderLine = (line) => {
 
-        let lineId = script.id+"-"+line.id;
+        let lineId = script.id + "-" + line.id;
         let currentCharacter = cast.findLast((character) => { return character.id == line.characterId });
-        let lineAnnotations = annotations.filter((annotation)=> annotation.lineId == lineId);
-        let currentUserAnnotation = lineAnnotations.findLast((annotation)=> annotation.userId == user.id);
-        let otherUsersAnnotations = lineAnnotations.filter((annotation)=> annotation.userId != user.id);
+        let lineAnnotations = annotations.filter((annotation) => annotation.lineId == lineId);
+        let currentUserAnnotation = lineAnnotations.findLast((annotation) => annotation.userId == user.id);
+        let otherUsersAnnotations = lineAnnotations.filter((annotation) => annotation.userId != user.id);
 
         return (
             <Line
@@ -252,7 +289,7 @@ export function MemorizingBuddy() {
                 displayName={currentCharacter.displayName}
                 isHighlighted={currentCharacter.isHighlighted}
                 text={line.text}
-                
+
                 //TODO: REPLACE WITH LIVEBLOCKS' USESELF?
                 currentUser={user}
                 getUserFromId={getUserFromId}
@@ -295,7 +332,7 @@ export function MemorizingBuddy() {
 
             {renderOptions()}
 
-            {renderScript()} 
+            {renderScript()}
 
             <div className={styles.footer}>
                 <div>Made with 🧡 by <a href="https://twitter.com/adigau31">Adrien Gaudon</a> 🎭</div>
