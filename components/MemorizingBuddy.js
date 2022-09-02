@@ -70,6 +70,10 @@ export function MemorizingBuddy() {
     }, [])
 
     const isHiddenLinesChanged = (data) => setIsHiddenLines(data)
+    const isOptimizedReadingChanged = (data) => setIsOptimizedReading(data)
+    const isAnnotationModeChanged = (data) => setIsAnnotationMode(data)
+    const scriptChanged = (data) => setScript(data)
+    const castChanged = (data) => setCast(data)
 
     if (user == null || script == null || annotations == null) {
         return <div>Loading...</div>
@@ -89,12 +93,12 @@ export function MemorizingBuddy() {
             />
 
             <Options
-                script={script} setScript={setScript}
-                cast={cast} setCast={setCast}
+                script={script} scriptChanged={scriptChanged}
+                cast={cast} castChanged={castChanged}
 
                 isHiddenLines={isHiddenLines} isHiddenLinesChanged={isHiddenLinesChanged}
-                isOptimizedReading={isOptimizedReading} setIsOptimizedReading={setIsOptimizedReading}
-                isAnnotationMode={isAnnotationMode} setIsAnnotationMode={setIsAnnotationMode}
+                isOptimizedReading={isOptimizedReading} isOptimizedReadingChanged={isOptimizedReadingChanged}
+                isAnnotationMode={isAnnotationMode} isAnnotationModeChanged={isAnnotationModeChanged}
             />
 
             <Script

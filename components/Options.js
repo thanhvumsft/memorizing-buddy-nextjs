@@ -5,15 +5,15 @@ import DataWidget from './DataWidget'
 export default function Options(props) {
     
         
-    const onHideLinesOptionClick = (event) => props.isHiddenLinesChanged(event.target.checked)
-    const onOptimizeForReadingClick = (event) => props.setIsOptimizedReading(event.target.checked)
-    const onAnnotationModeClick = (event) => props.setIsAnnotationMode(event.target.checked)
+    const onIsHiddenLinesChanged = (event) => props.isHiddenLinesChanged(event.target.checked)
+    const onIsOptimizedReadingChanged = (event) => props.isOptimizedReadingChanged(event.target.checked)
+    const onIsAnnotationModeChanged = (event) => props.isAnnotationModeChanged(event.target.checked)
 
     const onHighlightCharacterClick = (event, characterId) => {
         const newCast = props.cast.slice()
         var castKey = newCast.findIndex((x) => x.id == characterId)
         newCast[castKey].isHighlighted = event.target.checked
-        props.setCast(newCast)
+        props.castChanged(newCast)
     }
     const onHighlightSectionClick = (event, sectionNumber) => {
         
@@ -22,7 +22,7 @@ export default function Options(props) {
         newSections[sectionKey].isDisplayed = event.target.checked
         const newScript = {...props.script}
         newScript.sections = newSections 
-        props.setScript(newScript)
+        props.scriptChanged(newScript)
     }
 
     const renderOptionSection = (section) => {
@@ -78,7 +78,7 @@ export default function Options(props) {
                     <li>
                         <input
                             type="checkbox" checked={props.isHiddenLines} id="hideLines" name="hideLines" value="hide"
-                            onClick={(event) => onHideLinesOptionClick(event)} />
+                            onClick={(event) => onIsHiddenLinesChanged(event)} />
                         <label for="hideLines">
                             🧑‍🦯 Hide your lines
                         </label>
@@ -86,7 +86,7 @@ export default function Options(props) {
                     <li>
                         <input
                             type="checkbox" checked={props.isOptimizedReading} id="optimizeForReading" name="optimizeForReading" value="optimizeForReading"
-                            onClick={(event) => onOptimizeForReadingClick(event)} />
+                            onClick={(event) => onIsOptimizedReadingChanged(event)} />
                         <label for="optimizeForReading">
                             👓 Optimize for reading
                         </label>
@@ -94,7 +94,7 @@ export default function Options(props) {
                     <li>
                         <input
                             type="checkbox" checked={props.isAnnotationMode} id="annotationMode" name="annotationMode" value="annotationMode"
-                            onClick={(event) => onAnnotationModeClick(event)} />
+                            onClick={(event) => onIsAnnotationModeChanged(event)} />
                         <label for="annotationMode">
                             📝 Activate annotation mode
                         </label>
