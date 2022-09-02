@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { Avatar } from "../components/Avatar"
 
@@ -8,18 +7,18 @@ export default function Header(props) {
         <div>
             <h1>Memorizing Buddy</h1>
             <div>
-                {props.others.map(({ connectionId, info }) => {
+                {props.others.map((other) => {
                     return (
                         <Avatar
-                            key={connectionId}
-                            picture={info.picture}
-                            name={info.name}
+                            key={other.connectionId}
+                            picture={other.presence?.avatar}
+                            name={other.presence?.displayName}
                         />
                     )
                 })}
 
-                {props.currentUser && (
-                    <Avatar picture={props.currentUser.info?.picture} name="You" />
+                {props.myPresence && (
+                    <Avatar picture={props.myPresence.avatar} name={"You (" + props.myPresence.displayName + ")"}/>
                 )}
             </div>
         </div>

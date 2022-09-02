@@ -4,7 +4,6 @@ import styles from "./Script.module.css"
 
 export default function Script(props) {
 
-
     const lineIncrement = 0
 
     const getUserFromId = (userId) => {
@@ -64,7 +63,6 @@ export default function Script(props) {
                 isHighlighted={currentCharacter.isHighlighted}
                 text={line.text}
 
-                //TODO: REPLACE WITH LIVEBLOCKS' USESELF?
                 currentUser={props.user}
                 getUserFromId={getUserFromId}
 

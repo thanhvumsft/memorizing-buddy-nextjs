@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSelf, useOthers, useUpdateMyPresence, useList } from "../liveblocks.config.ts"
+import { useSelf, useOthers, useMyPresence, useList } from "../liveblocks.config.ts"
 import lemonstre from "../data/lemonstre"
 import romeoandjuliet from "../data/romeoandjuliet"
 import bigbangtheory from "../data/bigbangtheory"
@@ -26,10 +26,16 @@ export function MemorizingBuddy() {
     const others = useOthers().toArray()
     const currentUser = useSelf()
     const annotations = useList("annotations")
+    const [myPresence, updateMyPresence] = useMyPresence()
 
     const loadUser = (userId) => {
         let userIndex = users.users.findIndex((x, i) => x.id == userId)
         let newUser = users.users[userIndex]
+        updateMyPresence(
+            {
+                displayName: newUser.displayName,
+                avatar: newUser.avatar
+            })
         setUser(newUser)
     }
 
@@ -73,8 +79,8 @@ export function MemorizingBuddy() {
     return (
         <div>
             <Header
-                currentUser={currentUser}
                 others={others}
+                myPresence={myPresence}
             />
 
             <MockBackOffice
