@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { Avatar } from "../components/Avatar";
+import React from 'react'
+import { Avatar } from "../components/Avatar"
 
 export default function Header(props) {
 
@@ -15,7 +15,7 @@ export default function Header(props) {
                             picture={info.picture}
                             name={info.name}
                         />
-                    );
+                    )
                 })}
 
                 {props.currentUser && (
@@ -24,5 +24,5 @@ export default function Header(props) {
             </div>
         </div>
 
-    </>);
+    </>)
 }

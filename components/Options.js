@@ -1,28 +1,28 @@
 
-import React from 'react';
-import DataWidget from './DataWidget';
+import React from 'react'
+import DataWidget from './DataWidget'
 
 export default function Options(props) {
     
         
-    const onHideLinesOptionClick = (event) => props.setIsHiddenLines(event.target.checked);
-    const onOptimizeForReadingClick = (event) => props.setIsOptimizedReading(event.target.checked);
-    const onAnnotationModeClick = (event) => props.setIsAnnotationMode(event.target.checked);
+    const onHideLinesOptionClick = (event) => props.setIsHiddenLines(event.target.checked)
+    const onOptimizeForReadingClick = (event) => props.setIsOptimizedReading(event.target.checked)
+    const onAnnotationModeClick = (event) => props.setIsAnnotationMode(event.target.checked)
 
     const onHighlightCharacterClick = (event, characterId) => {
-        const newCast = props.cast.slice();
-        var castKey = newCast.findIndex((x) => x.id == characterId);
-        newCast[castKey].isHighlighted = event.target.checked;
-        props.setCast(newCast);
+        const newCast = props.cast.slice()
+        var castKey = newCast.findIndex((x) => x.id == characterId)
+        newCast[castKey].isHighlighted = event.target.checked
+        props.setCast(newCast)
     }
     const onHighlightSectionClick = (event, sectionNumber) => {
         
-        const newSections = props.script.sections.slice();
-        var sectionKey = newSections.findIndex((x) => x.number == sectionNumber);
-        newSections[sectionKey].isDisplayed = event.target.checked;
-        const newScript = {...props.script};
-        newScript.sections = newSections ;
-        props.setScript(newScript);
+        const newSections = props.script.sections.slice()
+        var sectionKey = newSections.findIndex((x) => x.number == sectionNumber)
+        newSections[sectionKey].isDisplayed = event.target.checked
+        const newScript = {...props.script}
+        newScript.sections = newSections 
+        props.setScript(newScript)
     }
 
     const renderOptionSection = (section) => {
@@ -48,7 +48,7 @@ export default function Options(props) {
                     {character.displayName}
                 </label>
             </li>
-        );
+        )
     }
 
     return (
@@ -108,5 +108,5 @@ export default function Options(props) {
                 </ul>
             </fieldset>
         </>
-    );
+    )
 }

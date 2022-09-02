@@ -1,26 +1,26 @@
 
-import React, { useState } from 'react';
-import styles from "./Line.module.css";
-import { textVide } from 'text-vide';
-import Switch from '@mui/material/Switch';
+import React, { useState } from 'react'
+import styles from "./Line.module.css"
+import { textVide } from 'text-vide'
+import Switch from '@mui/material/Switch'
 
 export default function Line(props) {
-    const [isTextForcedVisible, setIsTextForcedVisible] = useState(false);
+    const [isTextForcedVisible, setIsTextForcedVisible] = useState(false)
 
     const onAnnotationChange = (e) => {
-        props.onAddOrUpdateAnnotation(props.currentUser.id, props.id, e.target.value);
+        props.onAddOrUpdateAnnotation(props.currentUser.id, props.id, e.target.value)
     }
 
     const onRevealerButtonClick = (e) => {
-        setIsTextForcedVisible(e.target.checked);
+        setIsTextForcedVisible(e.target.checked)
     }
 
-    const isTextVisible = !props.isHighlighted || isTextForcedVisible || !props.hideHighlightedLines;
+    const isTextVisible = !props.isHighlighted || isTextForcedVisible || !props.hideHighlightedLines
 
     let getUserdisplayNameFromUserId = (userId) =>{
-        let user = props.getUserFromId(userId);
-        let displayName = user == null ? "Unknown" : user.displayName;
-        return displayName;
+        let user = props.getUserFromId(userId)
+        let displayName = user == null ? "Unknown" : user.displayName
+        return displayName
     }
 
     return (
@@ -61,5 +61,5 @@ export default function Line(props) {
                 <span className={isTextVisible ? styles.textShow : styles.textHide} dangerouslySetInnerHTML={{ __html: props.optimizeReading ? textVide(props.text) : props.text }} />
             </div>
         </li>
-    );
+    )
 }

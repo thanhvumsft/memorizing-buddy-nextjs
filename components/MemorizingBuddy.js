@@ -1,41 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { useSelf, useOthers, useUpdateMyPresence, useList } from "../liveblocks.config.ts";
-import lemonstre from "../data/lemonstre";
-import romeoandjuliet from "../data/romeoandjuliet";
-import bigbangtheory from "../data/bigbangtheory";
-import library from "../data/library";
-import users from "../data/users";
-import MockBackOffice from './MockBackOffice';
-import Options from './Options';
-import Header from './Header';
-import Script from './Script';
-import Footer from './Footer';
+import React, { useState, useEffect } from 'react'
+import { useSelf, useOthers, useUpdateMyPresence, useList } from "../liveblocks.config.ts"
+import lemonstre from "../data/lemonstre"
+import romeoandjuliet from "../data/romeoandjuliet"
+import bigbangtheory from "../data/bigbangtheory"
+import library from "../data/library"
+import users from "../data/users"
+import MockBackOffice from './MockBackOffice'
+import Options from './Options'
+import Header from './Header'
+import Script from './Script'
+import Footer from './Footer'
 
 export function MemorizingBuddy() {
 
-    const [allUsers, setAllUsers] = useState([]);
-    const [allScripts, setAllScripts] = useState([]);
-    const [user, setUser] = useState(null);
-    const [script, setScript] = useState(null);
-    const [cast, setCast] = useState([]);
+    const [allUsers, setAllUsers] = useState([])
+    const [allScripts, setAllScripts] = useState([])
+    const [user, setUser] = useState(null)
+    const [script, setScript] = useState(null)
+    const [cast, setCast] = useState([])
 
-    const [isHiddenLines, setIsHiddenLines] = useState(false);
-    const [isOptimizedReading, setIsOptimizedReading] = useState(false);
-    const [isAnnotationMode, setIsAnnotationMode] = useState(false);
+    const [isHiddenLines, setIsHiddenLines] = useState(false)
+    const [isOptimizedReading, setIsOptimizedReading] = useState(false)
+    const [isAnnotationMode, setIsAnnotationMode] = useState(false)
 
-    //LiveBlocks
-    const others = useOthers().toArray();
-    const currentUser = useSelf();
-    const annotations = useList("annotations");
+    const others = useOthers().toArray()
+    const currentUser = useSelf()
+    const annotations = useList("annotations")
 
     const loadUser = (userId) => {
         let userIndex = users.users.findIndex((x, i) => x.id == userId)
-        let newUser = users.users[userIndex];
+        let newUser = users.users[userIndex]
         setUser(newUser)
     }
 
     const loadScript = (scriptId) => {
-        const newScript = null;
+        const newScript = null
 
         if (scriptId == "lemonstre") { newScript = lemonstre }
         else if (scriptId == "romeoandjuliet") { newScript = romeoandjuliet }
@@ -56,14 +55,14 @@ export function MemorizingBuddy() {
                 displayName: value.displayName,
                 isHighlighted: false
             })))
-    };
+    }
 
     useEffect(() => {
         setAllUsers(users.users)
         setAllScripts(library.scripts)
         loadUser(users.users[Math.floor(Math.random() * users.users.length)].id)
         loadScript(library.scripts[0].id)
-    }, []);
+    }, [])
 
 
 
@@ -102,5 +101,5 @@ export function MemorizingBuddy() {
             <Footer />
 
         </div>
-    );
+    )
 }

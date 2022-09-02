@@ -1,25 +1,25 @@
-import React from 'react';
-import Line from "./Line";
-import styles from "./Script.module.css";
+import React from 'react'
+import Line from "./Line"
+import styles from "./Script.module.css"
 
 export default function Script(props) {
 
 
-    const lineIncrement = 0;
+    const lineIncrement = 0
 
     const getUserFromId = (userId) => {
         let userIndex = props.users.findIndex((x, i) => x.id == userId)
-        let foundUser = props.users[userIndex];
-        return foundUser;
+        let foundUser = props.users[userIndex]
+        return foundUser
     }
 
     const onAddOrUpdateAnnotation = (userId, lineId, text) => {
-        const annotationKey = props.annotations.findIndex((x) => x.userId == userId && x.lineId == lineId);
+        const annotationKey = props.annotations.findIndex((x) => x.userId == userId && x.lineId == lineId)
         if (annotationKey >= 0) {
-            props.annotations.set(annotationKey, { lineId: lineId, text: text, userId: userId });
+            props.annotations.set(annotationKey, { lineId: lineId, text: text, userId: userId })
         }
         else {
-            props.annotations.push({ lineId: lineId, text: text, userId: userId });
+            props.annotations.push({ lineId: lineId, text: text, userId: userId })
         }
     }
 
@@ -32,15 +32,15 @@ export default function Script(props) {
                             <div className={styles.section}>
                                 <h3>Section {section.number}</h3>
                                 <ul>{section.lines.map((line) => {
-                                    const newIncrementValue = lineIncrement;
-                                    lineIncrement = newIncrementValue + 1;
+                                    const newIncrementValue = lineIncrement
+                                    lineIncrement = newIncrementValue + 1
                                     return (
                                         renderLine(scriptId, line)
-                                    );
+                                    )
                                 }
                                 )}</ul>
                             </div>
-                        );
+                        )
                     })
                 }
             </div>
@@ -49,11 +49,11 @@ export default function Script(props) {
 
     const renderLine = (scriptId, line) => {
 
-        let lineId = scriptId + "-" + line.id;
-        let currentCharacter = props.cast.findLast((character) => { return character.id == line.characterId });
-        let lineAnnotations = props.annotations.filter((annotation) => annotation.lineId == lineId);
-        let currentUserAnnotation = lineAnnotations.findLast((annotation) => annotation.userId == props.user.id);
-        let otherUsersAnnotations = lineAnnotations.filter((annotation) => annotation.userId != props.user.id);
+        let lineId = scriptId + "-" + line.id
+        let currentCharacter = props.cast.findLast((character) => { return character.id == line.characterId })
+        let lineAnnotations = props.annotations.filter((annotation) => annotation.lineId == lineId)
+        let currentUserAnnotation = lineAnnotations.findLast((annotation) => annotation.userId == props.user.id)
+        let otherUsersAnnotations = lineAnnotations.filter((annotation) => annotation.userId != props.user.id)
 
         return (
             <Line

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default function MockBackOffice(props) {
 
@@ -9,11 +9,11 @@ export default function MockBackOffice(props) {
                     {props.allScripts.map((script) => {
                         return (
                             <option value={script.id}>{script.displayName}</option>
-                        );
+                        )
                     })}
                 </select>
             </>
-        );
+        )
     }
 
     const renderAllUsersSelector = () => {
@@ -23,15 +23,15 @@ export default function MockBackOffice(props) {
                     {props.allUsers.map((user) => {
                         return (
                             <option value={user.id}>{user.displayName}</option>
-                        );
+                        )
                     })}
                 </select>
             </>
-        );
+        )
     }
 
-    const onScriptSelected = (event) => props.loadScript(event.target.value);
-    const onUserSelected = (event) => props.loadUser(event.target.value);
+    const onScriptSelected = (event) => props.loadScript(event.target.value)
+    const onUserSelected = (event) => props.loadUser(event.target.value)
 
     return (
         <>
@@ -43,5 +43,5 @@ export default function MockBackOffice(props) {
                 <div>{renderAllScriptsSelector()}</div>
             </fieldset>
         </>
-    );
+    )
 }

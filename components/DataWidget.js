@@ -1,11 +1,11 @@
 
-import React, { useState } from 'react';
-import styles from "./DataWidget.module.css";
+import React, { useState } from 'react'
+import styles from "./DataWidget.module.css"
 
 export default function DataWidget(props) {
-    let sections = props.script.sections.filter(s=>s.isDisplayed);
-    let flattenedListOfLines = [];
-    let flattenedListOfCharacters = [];
+    let sections = props.script.sections.filter(s=>s.isDisplayed)
+    let flattenedListOfLines = []
+    let flattenedListOfCharacters = []
 
     sections.forEach(section =>
         section.lines.forEach(line => flattenedListOfLines.push({
@@ -13,10 +13,10 @@ export default function DataWidget(props) {
             id: line.id,
             characterId: line.characterId,
             text: line.text
-        })));
+        })))
 
     props.cast.forEach(character => {
-        let numberOfLines = getNumberOfLinesPerCharacter(character.id);
+        let numberOfLines = getNumberOfLinesPerCharacter(character.id)
         if(numberOfLines>0)
         {
             flattenedListOfCharacters.push(
@@ -28,7 +28,7 @@ export default function DataWidget(props) {
                 }
             )
         }
-    });
+    })
     
     let dataSummary = 
     {
@@ -38,21 +38,21 @@ export default function DataWidget(props) {
         numberOfLines:flattenedListOfCharacters.map(c=> c.numberOfLines).reduce((prev, curr) => prev + curr, 0), 
         numberOfWords:flattenedListOfCharacters.map(c=> c.numberOfWords).reduce((prev, curr) => prev + curr, 0), 
         characters:flattenedListOfCharacters
-    };
+    }
     
 
     function getNumberOfLinesPerCharacter(characterId) {
-        return flattenedListOfLines.filter(l=> l.characterId == characterId).length;
-    };
+        return flattenedListOfLines.filter(l=> l.characterId == characterId).length
+    }
     function getNumberOfWordsPerCharacter(characterId) {
-        return flattenedListOfLines.filter(l=> l.characterId == characterId).map(l=> l.text.split(' ').length).reduce((prev, curr) => prev + curr, 0);
-    };
+        return flattenedListOfLines.filter(l=> l.characterId == characterId).map(l=> l.text.split(' ').length).reduce((prev, curr) => prev + curr, 0)
+    }
 
     const renderDataCharacter = (character) => {
         return (
             <li>{character.numberOfLines} for {character.displayName} ({character.numberOfWords} words)</li>
-        );
-    };
+        )
+    }
 
     return (
         <div>
@@ -67,5 +67,5 @@ export default function DataWidget(props) {
                 </li>
             </ul>
         </div>
-    );
+    )
 }
