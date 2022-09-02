@@ -5,7 +5,7 @@ import DataWidget from './DataWidget'
 export default function Options(props) {
     
         
-    const onHideLinesOptionClick = (event) => props.setIsHiddenLines(event.target.checked)
+    const onHideLinesOptionClick = (event) => props.isHiddenLinesChanged(event.target.checked)
     const onOptimizeForReadingClick = (event) => props.setIsOptimizedReading(event.target.checked)
     const onAnnotationModeClick = (event) => props.setIsAnnotationMode(event.target.checked)
 

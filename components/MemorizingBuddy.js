@@ -24,7 +24,6 @@ export function MemorizingBuddy() {
     const [isAnnotationMode, setIsAnnotationMode] = useState(false)
 
     const others = useOthers().toArray()
-    const currentUser = useSelf()
     const annotations = useList("annotations")
     const [myPresence, updateMyPresence] = useMyPresence()
 
@@ -70,7 +69,7 @@ export function MemorizingBuddy() {
         loadScript(library.scripts[0].id)
     }, [])
 
-
+    const isHiddenLinesChanged = (data) => setIsHiddenLines(data)
 
     if (user == null || script == null || annotations == null) {
         return <div>Loading...</div>
@@ -93,7 +92,7 @@ export function MemorizingBuddy() {
                 script={script} setScript={setScript}
                 cast={cast} setCast={setCast}
 
-                isHiddenLines={isHiddenLines} setIsHiddenLines={setIsHiddenLines}
+                isHiddenLines={isHiddenLines} isHiddenLinesChanged={isHiddenLinesChanged}
                 isOptimizedReading={isOptimizedReading} setIsOptimizedReading={setIsOptimizedReading}
                 isAnnotationMode={isAnnotationMode} setIsAnnotationMode={setIsAnnotationMode}
             />
