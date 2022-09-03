@@ -39,6 +39,11 @@
             "id": "ali.benarbia", 
             "displayName": "Ali Benarbia", 
             "avatar": "/avatars/7.png" 
+        },
+        { 
+            "id": "lionel.letizi", 
+            "displayName": "Lionel Letizi", 
+            "avatar": "/avatars/8.png" 
         }
     ]
 }
