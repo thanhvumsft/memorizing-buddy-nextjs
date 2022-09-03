@@ -1,13 +1,24 @@
-import React from 'react'
-import { Avatar } from "../components/Avatar"
 
-export default function Header(props) {
+import React from 'react'
+import { Avatar } from "./Avatar"
+import { Presence } from "../liveblocks.config"
+
+//TODO: How do I replace tis with Liveblock's official types?
+type HeaderProps ={
+    myPresence: Presence,
+    others: {
+        connectionId: string,
+        presence?: Presence
+    }[]
+}
+
+export default function Header(props: HeaderProps) {
 
     return (<>
         <div>
             <h1>Memorizing Buddy</h1>
             <div>
-                {props.others.map((other) => {
+                {props.others?.map((other) => {
                     return (
                         <Avatar
                             key={other.connectionId}

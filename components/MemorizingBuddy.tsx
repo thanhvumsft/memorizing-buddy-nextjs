@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useSelf, useOthers, useMyPresence, useList } from "../liveblocks.config.ts"
-import lemonstre from "../data/lemonstre"
-import romeoandjuliet from "../data/romeoandjuliet"
-import bigbangtheory from "../data/bigbangtheory"
-import library from "../data/library"
-import users from "../data/users"
+import { useOthers, useMyPresence, useList } from "../liveblocks.config"
+import { ScriptType, CharacterType } from "../data/types"
+import lemonstre from "../data/lemonstre.json"
+import romeoandjuliet from "../data/romeoandjuliet.json"
+import bigbangtheory from "../data/bigbangtheory.json"
+import library from "../data/library.json"
+import users from "../data/users.json"
 import MockBackOffice from './MockBackOffice'
 import Options from './Options'
 import Header from './Header'
@@ -27,7 +28,7 @@ export function MemorizingBuddy() {
     const annotations = useList("annotations")
     const [myPresence, updateMyPresence] = useMyPresence()
 
-    const loadUser = (userId) => {
+    const loadUser = (userId: string) => {
         let userIndex = users.users.findIndex((x, i) => x.id == userId)
         let newUser = users.users[userIndex]
         updateMyPresence(
@@ -38,28 +39,45 @@ export function MemorizingBuddy() {
         setUser(newUser)
     }
 
-    const loadScript = (scriptId) => {
-        const newScript = null
+    const loadScript = (scriptId: string) => {
 
-        if (scriptId == "lemonstre") { newScript = lemonstre }
-        else if (scriptId == "romeoandjuliet") { newScript = romeoandjuliet }
-        else if (scriptId == "bigbangtheory") { newScript = bigbangtheory }
-        else { newScript = bigbangtheory }
+        let scriptJson = null
 
-        newScript.script.sections = newScript.script.sections.map(value => (
-            {
-                number: value.number,
-                lines: value.lines,
-                isDisplayed: true
-            }))
+        if (scriptId == "lemonstre") { scriptJson = lemonstre }
+        else if (scriptId == "romeoandjuliet") { scriptJson = romeoandjuliet }
+        else if (scriptId == "bigbangtheory") { scriptJson = bigbangtheory }
+        else { scriptJson = bigbangtheory }
 
-        setScript(newScript.script)
-        setCast(newScript.script.cast.map(value => (
-            {
-                id: value.id,
-                displayName: value.displayName,
-                isHighlighted: false
-            })))
+        let newScript: ScriptType = {
+            id: scriptJson.script.id,
+            type: scriptJson.script.type,
+            title: scriptJson.script.title,
+            lang: scriptJson.script.lang,
+            cast: scriptJson.script.cast.map(c => (
+                {
+                    id: c.id,
+                    displayName: c.displayName,
+                    isHighlighted: false
+                })),
+            sections: scriptJson.script.sections.map(s => (
+                {
+                    number: s.number,
+                    lines: s.lines.map(l=>({
+                        id: l.id,
+                        characterId: l.characterId,
+                        text: l.text,
+                        character: {
+                            id: l.characterId,
+                            displayName: "",
+                            isHighlighted: false
+                        },
+                    })),
+                    isDisplayed: true
+                }))
+        } 
+
+        setScript(newScript)
+        setCast(newScript.cast)
     }
 
     useEffect(() => {
@@ -69,11 +87,11 @@ export function MemorizingBuddy() {
         loadScript(library.scripts[0].id)
     }, [])
 
-    const isHiddenLinesChanged = (data) => setIsHiddenLines(data)
-    const isOptimizedReadingChanged = (data) => setIsOptimizedReading(data)
-    const isAnnotationModeChanged = (data) => setIsAnnotationMode(data)
-    const scriptChanged = (data) => setScript(data)
-    const castChanged = (data) => setCast(data)
+    const isHiddenLinesChanged = (data: boolean) => setIsHiddenLines(data)
+    const isOptimizedReadingChanged = (data: boolean) => setIsOptimizedReading(data)
+    const isAnnotationModeChanged = (data: boolean) => setIsAnnotationMode(data)
+    const scriptChanged = (data: ScriptType) => setScript(data)
+    const castChanged = (data: CharacterType[]) => setCast(data)
 
     if (user == null || script == null || annotations == null) {
         return <div>Loading...</div>

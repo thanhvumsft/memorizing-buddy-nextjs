@@ -1,6 +1,14 @@
 import React from 'react'
 
-export default function MockBackOffice(props) {
+type MockBackOfficeProps ={
+user: undefined,
+allScripts: undefined,
+loadScript: undefined,
+allUsers: undefined,
+loadUser: undefined
+}
+
+export default function MockBackOffice(props: MockBackOfficeProps) {
 
     const renderAllScriptsSelector = () => {
         return (

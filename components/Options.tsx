@@ -1,21 +1,36 @@
 
 import React from 'react'
 import DataWidget from './DataWidget'
+import { ScriptType, CharacterType, SectionType } from "../data/types"
 
-export default function Options(props) {
+type OptionsProps = {
+    script: ScriptType,
+    scriptChanged: Function,
+    cast: CharacterType[],
+    castChanged: Function,
+    
+    isHiddenLines: boolean,
+    isHiddenLinesChanged: Function,
+    isOptimizedReading: boolean,
+    isOptimizedReadingChanged: Function,
+    isAnnotationMode: boolean,
+    isAnnotationModeChanged: Function,
+}
+
+export default function Options(props: OptionsProps) {
     
         
-    const onIsHiddenLinesChanged = (event) => props.isHiddenLinesChanged(event.target.checked)
-    const onIsOptimizedReadingChanged = (event) => props.isOptimizedReadingChanged(event.target.checked)
-    const onIsAnnotationModeChanged = (event) => props.isAnnotationModeChanged(event.target.checked)
+    const onIsHiddenLinesChanged = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => props.isHiddenLinesChanged(event.target.checked)
+    const onIsOptimizedReadingChanged = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => props.isOptimizedReadingChanged(event.target.checked)
+    const onIsAnnotationModeChanged = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => props.isAnnotationModeChanged(event.target.checked)
 
-    const onHighlightCharacterClick = (event, characterId) => {
+    const onHighlightCharacterClick = (event: React.ChangeEvent<HTMLInputElement>, characterId: string) => {
         const newCast = props.cast.slice()
         var castKey = newCast.findIndex((x) => x.id == characterId)
         newCast[castKey].isHighlighted = event.target.checked
         props.castChanged(newCast)
     }
-    const onHighlightSectionClick = (event, sectionNumber) => {
+    const onHighlightSectionClick = (event: React.MouseEvent<HTMLInputElement, MouseEvent>, sectionNumber: string) => {
         
         const newSections = props.script.sections.slice()
         var sectionKey = newSections.findIndex((x) => x.number == sectionNumber)
@@ -25,7 +40,7 @@ export default function Options(props) {
         props.scriptChanged(newScript)
     }
 
-    const renderOptionSection = (section) => {
+    const renderOptionSection = (section: SectionType) => {
         return (
             <li>
                 <input
@@ -38,7 +53,7 @@ export default function Options(props) {
         )
     }
 
-    const renderOptionCharacter = (character) => {
+    const renderOptionCharacter = (character: CharacterType) => {
         return (
             <li>
                 <input
