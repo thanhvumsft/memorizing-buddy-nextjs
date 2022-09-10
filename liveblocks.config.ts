@@ -1,4 +1,4 @@
-import { createClient } from "@liveblocks/client";
+import { createClient,LiveMap } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
 
 const client = createClient({
@@ -9,6 +9,7 @@ const client = createClient({
 // and that will automatically be kept in sync. Accessible through the
 // `user.presence` property. Must be JSON-serializable.
 export type Presence = {
+  id: string,
   avatar: string,
   displayName: string,
 };
@@ -38,9 +39,13 @@ export type UserMeta = {
 // room. Must be JSON-serializable.
 // type RoomEvent = {};
 
-export const { RoomProvider, useOthers, useSelf, useMyPresence, useUpdateMyPresence, useList } = createRoomContext<
-  Presence,
-  Storage,
-  UserMeta
-  /* RoomEvent */
->(client);
+export const { RoomProvider, useOthers, useSelf, useMyPresence, useUpdateMyPresence, useList, useMap } 
+  = createRoomContext<
+      Presence,
+      Storage,
+      UserMeta>(client);
+
+
+
+
+

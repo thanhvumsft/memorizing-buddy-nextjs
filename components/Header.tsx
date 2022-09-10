@@ -5,8 +5,8 @@ import { Presence } from "../liveblocks.config"
 
 //TODO: How do I replace tis with Liveblock's official types?
 type HeaderProps ={
-    myPresence: Presence,
-    others: {
+    myPresence?: Presence,
+    others?: {
         connectionId: string,
         presence?: Presence
     }[]

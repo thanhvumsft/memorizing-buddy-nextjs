@@ -4,7 +4,6 @@ import { RoomProvider, useOthers, useSelf } from "../liveblocks.config";
 import { useRouter } from "next/router";
 
 import { LiveList } from "@liveblocks/client";
-import styles from "./index.module.css";
 
 
 
@@ -14,7 +13,11 @@ export default function Page() {
   return (
     <RoomProvider
       id={roomId}
-      initialStorage={{ annotations: new LiveList() }}>
+      initialStorage={
+        { 
+          annotations: new LiveList(),
+          charactersSelected:  new LiveList() 
+        }}>
       <MemorizingBuddy />
     </RoomProvider>
   );

@@ -1,15 +1,14 @@
-
 import React, { useState } from 'react'
 import styles from "./Line.module.css"
 import { textVide } from 'text-vide'
 import Switch from '@mui/material/Switch'
-import {LineType, UserType, AnnotationType} from "../data/types"
+import {LineType, AnnotationType} from "../data/types"
 
 type LineProps = {
     line: LineType,
 
-    currentUser: UserType,
-    getUserFromId: Function,
+    scriptId: string,
+    currentUserId: string,
 
     isHiddenLines: boolean,
     isOptimizedReading: boolean,
@@ -22,9 +21,18 @@ type LineProps = {
 
 export default function Line(props: LineProps) {
     const [isTextForcedVisible, setIsTextForcedVisible] = useState(false)
+    let currentUserAnnotation = props.currentUserAnnotation ?? 
+        {
+            scriptId: props.scriptId,
+            lineId: props.line.id,
+            text: "",
+            userId: props.currentUserId
+        }
 
-    const onAnnotationChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        props.onAddOrUpdateAnnotation(props.currentUser.id, props.line.id, e.target.value)
+
+    const onAnnotationChange = (e: React.ChangeEvent<HTMLTextAreaElement>, a: AnnotationType) => {
+        a.text=e.target.value
+        props.onAddOrUpdateAnnotation(a)
     }
 
     //TODO: Retrieve the type of ther Switch element I imported
@@ -35,11 +43,6 @@ export default function Line(props: LineProps) {
 
     const isTextVisible = !props.line.character.isHighlighted || isTextForcedVisible || !props.isHiddenLines
 
-    let getUserdisplayNameFromUserId = (userId: string) =>{
-        let user = props.getUserFromId(userId)
-        let displayName = user == null ? "Unknown" : user.displayName
-        return displayName
-    }
 
     return (
         <li>
@@ -48,25 +51,25 @@ export default function Line(props: LineProps) {
                 {props.otherUsersAnnotations.map((a)=>  {
                     return (
                         <fieldset id={"othersAnnotationFieldset-" + props.line.id} className={styles.othersAnnotation}>
-                            <legend>{getUserdisplayNameFromUserId(a.userId)}</legend>
+                            <legend>{a.user.displayName}</legend>
                             <textarea
                                 className={styles.annotationText}
                                 onChange={(event) => {
-                                    onAnnotationChange(event)
+                                    onAnnotationChange(event, a)
                                 }}
                                 value={a.text}></textarea>
                         </fieldset>)}
                 )}
 
             <fieldset id={"yourAnnotationFieldset-" + props.line.id} className={styles.yoursAnnotation}>
-                <legend >Your notes ({getUserdisplayNameFromUserId(props.currentUser.id)})</legend>
+                <legend >Your notes</legend>
                 <textarea
                     className={styles.annotationText}
                     onChange={(event) => {
-                        onAnnotationChange(event)
+                        onAnnotationChange(event, currentUserAnnotation)
                     }}
-                    value={props.currentUserAnnotation != null ? props.currentUserAnnotation.text : ""}></textarea>
-            </fieldset>
+                    value={currentUserAnnotation.text}></textarea>
+                    </fieldset>
             </div>
             
     

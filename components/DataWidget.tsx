@@ -1,7 +1,6 @@
 
 import React from 'react'
 import { ScriptType, CharacterType } from "../data/types"
-import styles from "./DataWidget.module.css"
 
 type DataWidgetProps = {
     script: ScriptType,

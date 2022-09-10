@@ -10,7 +10,6 @@ export type ScriptType = {
     type: string,
     title: string,
     lang: string,
-
     cast: CharacterType[],
     sections: SectionType[]
 }
@@ -20,7 +19,6 @@ export type CharacterType = {
     displayName: string,
     isHighlighted?: boolean
 }
-
 
 export type SectionType = {
     number: string,
@@ -36,7 +34,15 @@ export type LineType = {
 }
 
 export type AnnotationType = {
-    userId: string,
+    scriptId: string,
+    lineId: string,
     text: string,
-    lineId: string
+    userId: string,
+    user?: UserType
+}
+
+export type UserToCharactersType = {
+    userId: string,
+    scriptId: string,
+    characterIds: string[]
 }

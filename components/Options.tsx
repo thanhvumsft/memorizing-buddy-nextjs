@@ -1,7 +1,8 @@
-
 import React from 'react'
 import DataWidget from './DataWidget'
-import { ScriptType, CharacterType, SectionType } from "../data/types"
+import { ScriptType, CharacterType, SectionType, UserToCharactersType } from "../data/types"
+import { LiveMap } from "@liveblocks/client";
+import { useOthers, useMyPresence } from "../liveblocks.config"
 
 type OptionsProps = {
     script: ScriptType,
@@ -15,10 +16,19 @@ type OptionsProps = {
     isOptimizedReadingChanged: Function,
     isAnnotationMode: boolean,
     isAnnotationModeChanged: Function,
+
+    charactersSelectedPerUser: LiveMap<string, UserToCharactersType>,
+    generateUserToCharactersUniqueId: Function
 }
 
 export default function Options(props: OptionsProps) {
     
+    const others = useOthers()
+    const [myPresence, updateMyPresence] = useMyPresence()
+
+
+    const key = props.generateUserToCharactersUniqueId(props.script.id, myPresence.id)
+    const currentUsersCharacterIds = props.charactersSelectedPerUser.has(key) ? props.charactersSelectedPerUser.get(key)?.characterIds : []
         
     const onIsHiddenLinesChanged = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => props.isHiddenLinesChanged(event.target.checked)
     const onIsOptimizedReadingChanged = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => props.isOptimizedReadingChanged(event.target.checked)
@@ -31,7 +41,6 @@ export default function Options(props: OptionsProps) {
         props.castChanged(newCast)
     }
     const onHighlightSectionClick = (event: React.MouseEvent<HTMLInputElement, MouseEvent>, sectionNumber: string) => {
-        
         const newSections = props.script.sections.slice()
         var sectionKey = newSections.findIndex((x) => x.number == sectionNumber)
         newSections[sectionKey].isDisplayed = event.target.checked
