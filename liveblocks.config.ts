@@ -1,4 +1,4 @@
-import { createClient } from "@liveblocks/client";
+import { createClient, LiveMap } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
 
 const client = createClient({
@@ -8,9 +8,10 @@ const client = createClient({
 // Presence represents the properties that will exist on every User in the Room
 // and that will automatically be kept in sync. Accessible through the
 // `user.presence` property. Must be JSON-serializable.
-type Presence = {
-  // cursor: { x: number, y: number } | null,
-  // ...
+export type Presence = {
+  id: string,
+  avatar: string,
+  displayName: string,
 };
 
 // Optionally, Storage represents the shared document that persists in the
@@ -25,8 +26,9 @@ type Storage = {
 // UserMeta represents static/readonly metadata on each User, as provided by
 // your own custom auth backend (if used). Useful for data that will not change
 // during a session, like a User's name or avatar.
-type UserMeta = {
+export type UserMeta = {
   id: string;
+  connectionId: string,
   info: {
     name: string;
     picture: string;
@@ -37,9 +39,21 @@ type UserMeta = {
 // room. Must be JSON-serializable.
 // type RoomEvent = {};
 
-export const { RoomProvider, useOthers, useSelf, useMyPresence, useUpdateMyPresence, useList } = createRoomContext<
-  Presence,
-  Storage,
-  UserMeta
-  /* RoomEvent */
->(client);
+export const
+  {
+    suspense:
+    {
+      RoomProvider,
+      useOthers, useSelf, useMyPresence, useUpdateMyPresence,
+      useStorage, useMutation
+    }
+  }
+    = createRoomContext<
+      Presence,
+      Storage,
+      UserMeta>(client);
+
+
+
+
+

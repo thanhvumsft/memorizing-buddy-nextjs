@@ -1,11 +1,39 @@
 
-import React, { useState } from 'react'
-import styles from "./DataWidget.module.css"
+import React from 'react'
+import { ScriptType, CharacterType } from "../data/types"
 
-export default function DataWidget(props) {
+type DataWidgetProps = {
+    script: ScriptType,
+    cast: CharacterType[]
+}
+
+type FlattenedLine = {
+    section: string,
+    id: string,
+    characterId: string,
+    text: string
+}
+
+type FlattenedCharacter = {
+    id: string,
+    displayName: string,
+    numberOfLines: number,
+    numberOfWords: number
+}
+
+type DataSummary = {
+    numberOfSections: number, 
+    numberOfCharacters: number, 
+    //TODO WHAT WOULD BE THE BEXT WAY TO GET THAT NUMBER?
+    numberOfLines: number, 
+    numberOfWords:number, 
+    characters:FlattenedCharacter[]
+}
+
+export default function DataWidget(props: DataWidgetProps) {
     let sections = props.script.sections.filter(s=>s.isDisplayed)
-    let flattenedListOfLines = []
-    let flattenedListOfCharacters = []
+    let flattenedListOfLines: FlattenedLine[] = []
+    let flattenedListOfCharacters: FlattenedCharacter[] = []
 
     sections.forEach(section =>
         section.lines.forEach(line => flattenedListOfLines.push({
@@ -30,25 +58,25 @@ export default function DataWidget(props) {
         }
     })
     
-    let dataSummary = 
+    let dataSummary: DataSummary = 
     {
         numberOfSections: sections.length, 
         numberOfCharacters: flattenedListOfCharacters.length, 
         //TODO WHAT WOULD BE THE BEXT WAY TO GET THAT NUMBER?
         numberOfLines:flattenedListOfCharacters.map(c=> c.numberOfLines).reduce((prev, curr) => prev + curr, 0), 
         numberOfWords:flattenedListOfCharacters.map(c=> c.numberOfWords).reduce((prev, curr) => prev + curr, 0), 
-        characters:flattenedListOfCharacters
+        characters: flattenedListOfCharacters
     }
     
 
-    function getNumberOfLinesPerCharacter(characterId) {
+    function getNumberOfLinesPerCharacter(characterId: string) {
         return flattenedListOfLines.filter(l=> l.characterId == characterId).length
     }
-    function getNumberOfWordsPerCharacter(characterId) {
+    function getNumberOfWordsPerCharacter(characterId: string) {
         return flattenedListOfLines.filter(l=> l.characterId == characterId).map(l=> l.text.split(' ').length).reduce((prev, curr) => prev + curr, 0)
     }
 
-    const renderDataCharacter = (character) => {
+    const renderDataCharacter = (character: FlattenedCharacter) => {
         return (
             <li>{character.numberOfLines} for {character.displayName} ({character.numberOfWords} words)</li>
         )
