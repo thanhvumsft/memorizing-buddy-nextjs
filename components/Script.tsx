@@ -12,21 +12,14 @@ type SprintProps = {
     isHiddenLines: boolean,
     isOptimizedReading: boolean,
     isAnnotationMode: boolean
+    addOrUpdateAnnotation: Function
 }
 
 export default function Script(props: SprintProps) {
 
     let lineIncrement: number = 0
 
-    const onAddOrUpdateAnnotation = (annotation: AnnotationType) => {
-        const annotationKey = props.annotations.findIndex((x) => x.userId == annotation.userId && x.lineId == annotation.lineId && x.scriptId == annotation.scriptId)  
-        if (annotationKey >= 0) {
-            props.annotations.set(annotationKey, annotation)
-        }
-        else {
-            props.annotations.push(annotation)
-        }
-    }
+    const onAddOrUpdateAnnotation = (annotation: AnnotationType) => props.addOrUpdateAnnotation(annotation)
 
     const renderSections = (scriptId: string, sections: SectionType[]) => {
         return (
@@ -54,9 +47,8 @@ export default function Script(props: SprintProps) {
 
     const renderLine = (scriptId: string, line: LineType) => {
 
-        let lineId = scriptId + "-" + line.id
         let currentCharacter = props.cast.findLast((character) => { return character.id == line.characterId })
-        let lineAnnotations = props.annotations.filter((annotation) => annotation.lineId == lineId);
+        let lineAnnotations = props.annotations.filter((annotation) => annotation.lineId == line.id);
         let currentUserAnnotation = lineAnnotations.findLast((annotation) => annotation.userId == props.currentUserId)
         let otherUsersAnnotations = lineAnnotations.filter((annotation) => annotation.userId != props.currentUserId)
 

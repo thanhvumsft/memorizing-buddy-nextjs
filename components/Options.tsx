@@ -22,13 +22,14 @@ type OptionsProps = {
 }
 
 export default function Options(props: OptionsProps) {
-    
+    console.log("Options: script")
+    console.log(props.script)
     const others = useOthers()
     const [myPresence, updateMyPresence] = useMyPresence()
 
 
-    const key = props.generateUserToCharactersUniqueId(props.script.id, myPresence.id)
-    const currentUsersCharacterIds = props.charactersSelectedPerUser.has(key) ? props.charactersSelectedPerUser.get(key)?.characterIds : []
+    // const key = props.generateUserToCharactersUniqueId(props.script.id, myPresence.id)
+    // const currentUsersCharacterIds = props.charactersSelectedPerUser.has(key) ? props.charactersSelectedPerUser.get(key)?.characterIds : []
         
     const onIsHiddenLinesChanged = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => props.isHiddenLinesChanged(event.target.checked)
     const onIsOptimizedReadingChanged = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => props.isOptimizedReadingChanged(event.target.checked)

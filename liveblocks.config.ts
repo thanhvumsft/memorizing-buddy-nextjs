@@ -1,4 +1,4 @@
-import { createClient,LiveMap } from "@liveblocks/client";
+import { createClient, LiveMap } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
 
 const client = createClient({
@@ -39,8 +39,16 @@ export type UserMeta = {
 // room. Must be JSON-serializable.
 // type RoomEvent = {};
 
-export const { RoomProvider, useOthers, useSelf, useMyPresence, useUpdateMyPresence, useList, useMap } 
-  = createRoomContext<
+export const
+  {
+    suspense:
+    {
+      RoomProvider,
+      useOthers, useSelf, useMyPresence, useUpdateMyPresence,
+      useStorage, useMutation
+    }
+  }
+    = createRoomContext<
       Presence,
       Storage,
       UserMeta>(client);

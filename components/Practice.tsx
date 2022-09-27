@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import Options from './Options'
 import Script from './Script'
 import Footer from './Footer'
-import { useList, useMap } from "../liveblocks.config"
 import sourceAllScripts from "../data/allScripts.json"
 import sourceAllUsers from "../data/allUsers.json"
-import { useOthers, useMyPresence } from "../liveblocks.config"
+import { useOthers, useMyPresence, useStorage, useMutation } from "../liveblocks.config"
 import { ScriptType, UserType, CharacterType, AnnotationType } from "../data/types"
 import Header from './Header'
+import Loading from './Loading'
 
 type PracticeProps = {
     currentScriptId: string,
@@ -19,19 +19,27 @@ export default function Practice(props: PracticeProps) {
     //Liveblocks
     const others = useOthers()
     const [myPresence, updateMyPresence] = useMyPresence()
-    const annotations = useList("annotations")
-    const charactersSelectedPerUser = useMap("charactersSelectedPerUser")
-
-    // if (charactersSelectedPerUser == null) {
-    //     return <div>Loading...</div>;
-    // }
+    const charactersSelectedPerUser = useStorage((root) => root.charactersSelectedPerUser);
+    const annotations = useStorage((root) => root.annotations);
+    
+    const addOrUpdateAnnotation = useMutation(({ storage }, annotation) => {
+        console.log("Function: addOrUpdateAnnotation")
+        const annotationKey = storage.get("annotations").findIndex((x) =>   x.userId == annotation.userId && 
+                                                                            x.lineId == annotation.lineId && 
+                                                                            x.scriptId == annotation.scriptId)  
+       
+        console.log("annotationKey: " + annotationKey)
+        if 
+            (annotationKey >= 0) storage.get("annotations").set(annotationKey, annotation)
+        else 
+            storage.get("annotations").push(annotation)
+    }, []);
 
     //Sates
     const [allUsers, setAllUsers] = useState<UserType[]>([])
     const [currentUser, setCurrentUser] = useState<UserType>(null)
     const [script, setScript] = useState<ScriptType>(null)
     const [cast, setCast] = useState<CharacterType[]>([])
-    // const [annotations, setAnnotations] = useState<LiveList<AnnotationType>>([])
     const [isHiddenLines, setIsHiddenLines] = useState(false)
     const [isOptimizedReading, setIsOptimizedReading] = useState(false)
     const [isAnnotationMode, setIsAnnotationMode] = useState(false)
@@ -86,24 +94,12 @@ export default function Practice(props: PracticeProps) {
         return foundCharacter
     }
 
-    // const loadAnnotations = (scriptId: string) => {
-    //     if (annotations == null || annotations.length == 0)
-    //         return
+    // const getIsCharacterHighlightedFromStorage = (userId: string, scriptId: string, characterId: string) => {
 
-    //     let currentAnnotations = annotations.filter(a => a.scriptId == scriptId)
-
-    //     if (currentAnnotations.length == 0)
-    //         return
-
-    //     currentAnnotations.map(a => a.user = { id: a.userId, avatar: getUserAvatarFromUserId(a.userId), displayName: getUserDisplayNameFromUserId(a.userId) })
+    //     let result = charactersSelectedPerUser.findLast(x => x.userId == userId && x.scriptId == scriptId)
+    //     let yaya = result.characterIds.findLast(x => x == characterId)
+    //     return yaya != null ? true : false
     // }
-
-    const getIsCharacterHighlightedFromStorage = (userId: string, scriptId: string, characterId: string) => {
-
-        let result = charactersSelectedPerUser.findLast(x => x.userId == userId && x.scriptId == scriptId)
-        let yaya = result.characterIds.findLast(x => x == characterId)
-        return yaya != null ? true : false
-    }
 
 
     const loadScript = (scriptId: string) => {
@@ -111,7 +107,6 @@ export default function Practice(props: PracticeProps) {
         let currentScript = sourceAllScripts.findLast(s => s.id == scriptId)
 
         // currentScript.cast.map(c => c.isHighlighted = getIsCharacterHighlightedFromStorage(props.currentUserId, props.currentScriptId, c.id))
-
 
         currentScript.sections.map(s => s.isDisplayed = true)
         currentScript.sections.map(s => s.lines.map(l => l.character = {
@@ -125,6 +120,7 @@ export default function Practice(props: PracticeProps) {
     }
 
     const loadUser = (userId: string) => {
+        console.log("*** loadUser")
         let userIndex = sourceAllUsers.findIndex((x, i) => x.id == userId)
         let newUser = sourceAllUsers[userIndex]
         updateMyPresence(
@@ -136,28 +132,32 @@ export default function Practice(props: PracticeProps) {
         setCurrentUser(newUser)
     }
     useEffect(() => {
+        console.log("==> UseEffect: []]")
         setAllUsers(sourceAllUsers)
         loadUser(props.currentUserId)
         loadScript(props.currentScriptId)
-        // loadAnnotations(props.currentScriptId)
     }, [])
 
-    if (annotations == null || charactersSelectedPerUser == null
-    ) {
-        return (
-              <div className="loading">
-                <img src="https://liveblocks.io/loading.svg" alt="Loading" />
-              </div>
-            )
-          
+
+    useEffect(() => {
+        console.log("==> UseEffect: annotations")
+      }, [annotations]);
+      
+      useEffect(() => {
+        console.log("==> UseEffect: charactersSelectedPerUser")
+      }, [charactersSelectedPerUser]);
+
+    if(script==null || cast==null)
+    {
+        return (<Loading />)
     }
 
 
     return (
         <>
             <Header myPresence={myPresence} others={others} />
-
-            <Options
+            
+             <Options
                 script={script} scriptChanged={scriptChanged}
                 cast={cast} castChanged={castChanged}
 
@@ -171,9 +171,10 @@ export default function Practice(props: PracticeProps) {
 
             <Script
                 script={script} cast={cast} annotations={annotations}
+                addOrUpdateAnnotation={addOrUpdateAnnotation}
                 users={allUsers} currentUserId={props.currentUserId}
                 isHiddenLines={isHiddenLines} isOptimizedReading={isOptimizedReading} isAnnotationMode={isAnnotationMode}
-            />
+            /> 
 
             <Footer />
         </>

@@ -2,8 +2,11 @@ import React, { useMemo } from "react";
 import { MemorizingBuddy } from "../components/MemorizingBuddy";
 import { RoomProvider, useOthers, useSelf } from "../liveblocks.config";
 import { useRouter } from "next/router";
+import { Suspense } from "react";
+
 
 import { LiveList } from "@liveblocks/client";
+import Loading from "../components/Loading";
 
 
 
@@ -11,15 +14,7 @@ export default function Page() {
   const roomId = useOverrideRoomId("memorizing-buddy");
 
   return (
-    <RoomProvider
-      id={roomId}
-      initialStorage={
-        { 
-          annotations: new LiveList(),
-          charactersSelected:  new LiveList() 
-        }}>
-      <MemorizingBuddy />
-    </RoomProvider>
+        <MemorizingBuddy />
   );
 }
 

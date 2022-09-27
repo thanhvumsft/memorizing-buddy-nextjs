@@ -10,6 +10,7 @@ import MockBackOffice from './MockBackOffice'
 import Header from './Header'
 import Footer from './Footer'
 import Practice from './Practice'
+import Loading from './Loading';
 
 export function MemorizingBuddy() {
 
@@ -59,17 +60,17 @@ export function MemorizingBuddy() {
     const currentUserIdChanged = (data: string) => setCurrentUserId(data)
 
     if (currentUser == null) {
-        return <div>Loading...</div>
+        return <Loading />
     }
 
     return (
 
         <>
 
-            {/* <Header
+            <Header
                 myPresence={myPresence}
                 others={others}
-            /> */}
+            />
 
             <MockBackOffice
                 currentUserId={currentUserId}

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from "./Line.module.css"
 import { textVide } from 'text-vide'
 import Switch from '@mui/material/Switch'
-import {LineType, AnnotationType} from "../data/types"
+import { LineType, AnnotationType } from "../data/types"
 
 type LineProps = {
     line: LineType,
@@ -21,17 +21,17 @@ type LineProps = {
 
 export default function Line(props: LineProps) {
     const [isTextForcedVisible, setIsTextForcedVisible] = useState(false)
-    let currentUserAnnotation = props.currentUserAnnotation ?? 
-        {
-            scriptId: props.scriptId,
-            lineId: props.line.id,
-            text: "",
-            userId: props.currentUserId
-        }
+    let currentUserAnnotation = props.currentUserAnnotation == null ??
+    {
+        scriptId: props.scriptId,
+        lineId: props.line.id,
+        text: "",
+        userId: props.currentUserId
+    }
 
 
     const onAnnotationChange = (e: React.ChangeEvent<HTMLTextAreaElement>, a: AnnotationType) => {
-        a.text=e.target.value
+        a.text = e.target.value
         props.onAddOrUpdateAnnotation(a)
     }
 
@@ -43,36 +43,57 @@ export default function Line(props: LineProps) {
 
     const isTextVisible = !props.line.character.isHighlighted || isTextForcedVisible || !props.isHiddenLines
 
+    console.log("props")
+    console.log(props)
+    console.log("props.otherUsersAnnotations")
+    console.log(props.otherUsersAnnotations)
+
+    const renderYourAnnotation = (lineId: string, annotation: AnnotationType) => {
+        return (
+            <fieldset id={"yourAnnotationFieldset-" + lineId} className={styles.yoursAnnotation}>
+                <legend >Your notes</legend>
+                <textarea
+                    className={styles.annotationText}
+                    onChange={(event) => {
+                    onAnnotationChange(event, annotation)
+                    }}
+                    value={annotation.text}>
+                </textarea>
+            </fieldset>);
+    }
+
+
+        const renderOtherAnnotation = (lineId: string, annotations: AnnotationType[]) => {
+            console.log("ˆˆˆˆˆˆˆ^renderOtherAnnotation")
+            console.log(annotations)
+        if(annotations == null)
+            return;
+        else
+            return (annotations.map((a) => {
+                        return (
+                            <fieldset id={"othersAnnotationFieldset-" + lineId} className={styles.othersAnnotation}>
+                                <legend>{a.userId}</legend>
+                                <textarea
+                                    className={styles.annotationText}
+                                    value={a.text}></textarea>
+                            </fieldset>
+                        )
+                    }))
+                }
+                
 
     return (
         <li>
 
             <div className={props.isAnnotationMode ? styles.annotationShow : styles.annotationHide}>
-                {props.otherUsersAnnotations.map((a)=>  {
-                    return (
-                        <fieldset id={"othersAnnotationFieldset-" + props.line.id} className={styles.othersAnnotation}>
-                            <legend>{a.user.displayName}</legend>
-                            <textarea
-                                className={styles.annotationText}
-                                onChange={(event) => {
-                                    onAnnotationChange(event, a)
-                                }}
-                                value={a.text}></textarea>
-                        </fieldset>)}
-                )}
+                
+                {renderOtherAnnotation(props.line.id, props.otherUsersAnnotations)}
 
-            <fieldset id={"yourAnnotationFieldset-" + props.line.id} className={styles.yoursAnnotation}>
-                <legend >Your notes</legend>
-                <textarea
-                    className={styles.annotationText}
-                    onChange={(event) => {
-                        onAnnotationChange(event, currentUserAnnotation)
-                    }}
-                    value={currentUserAnnotation.text}></textarea>
-                    </fieldset>
+                {renderYourAnnotation(props.line.id, currentUserAnnotation)}
+                
             </div>
-            
-    
+
+
             <div className={props.line.character.isHighlighted ? styles.highlightedLine : styles.line}>
                 <span className={styles.character}>{props.line.character.displayName}</span>
                 <span>: </span>

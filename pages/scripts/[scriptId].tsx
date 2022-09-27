@@ -3,24 +3,28 @@ import Practice from '../../components/Practice'
 import { RoomProvider } from "../../liveblocks.config"
 import { LiveList, LiveMap } from "@liveblocks/client";
 import { AnnotationType, UserToCharactersType } from "../../data/types";
+import Loading from "../../components/Loading";
+import { Suspense } from "react";
 
 export default function ScriptView() {
     const router = useRouter();
     const { scriptId, userId } = router.query;
 
     const initialStorage = () => ({
-      charactersSelectedPerUser: new LiveMap<string,UserToCharactersType>(),
-      annotations: new LiveList([])
+        charactersSelectedPerUser: new LiveMap([]),
+        annotations: new LiveList([])
     });
 
     if (scriptId == null) {
-        return (<>Loading...</>);
+        return (<Loading />);
     }
 
     return (
         <>
+        <Suspense fallback={(<Loading />)}>
             <RoomProvider
                 id={scriptId as string}
+                initialPresence={{}}
                 initialStorage={initialStorage}>
 
                 <Practice
@@ -29,6 +33,7 @@ export default function ScriptView() {
                 />
 
             </RoomProvider>
+            </Suspense>
 
         </>)
 }
